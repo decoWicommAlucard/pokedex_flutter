@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:pokedex_flutter/colors.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 30),
@@ -15,7 +16,11 @@ class HomePage extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: Text(
                   'Pokedex',
-                  style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    color: primaryColor,
+                  ),
                 ),
               ),
 
