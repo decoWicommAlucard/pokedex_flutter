@@ -24,11 +24,17 @@ class HomePage extends StatelessWidget {
                 ),
               ),
 
+              SizedBox(height: 20),
+
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
                   'search for pokemon by name or using its National Pokedex number.',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w400,
+                    color: primaryColor,
+                  ),
                 ),
               ),
             ],
