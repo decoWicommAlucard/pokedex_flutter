@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pokedex_flutter/colors.dart';
+import 'package:pokedex_flutter/store/home.store.dart';
 import 'package:pokedex_flutter/widgets/poke_card.widget.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  HomePage({super.key}) {
+    store.loadPokemons();
+  }
+
+  final store = HomeStore();
 
   @override
   Widget build(BuildContext context) {
@@ -57,19 +63,26 @@ class HomePage extends StatelessWidget {
 
               SizedBox(height: 20),
 
-              Expanded(
-                child: GridView.builder(
-                  itemCount: 20,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                    childAspectRatio: 2 / 2.8,
-                  ),
-                  itemBuilder: (context, index) {
-                    return PokeCard();
-                  },
-                ),
+              Observer(
+                builder: (_) {
+                  return Expanded(
+                    child: store.isLoading
+                        ? Center(child: CircularProgressIndicator())
+                        : GridView.builder(
+                            itemCount: store.pokemons.length,
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  crossAxisSpacing: 10,
+                                  mainAxisSpacing: 10,
+                                  childAspectRatio: 2 / 2.8,
+                                ),
+                            itemBuilder: (context, index) {
+                              return PokeCard(pokemon: store.pokemons[index]);
+                            },
+                          ),
+                  );
+                },
               ),
             ],
           ),
