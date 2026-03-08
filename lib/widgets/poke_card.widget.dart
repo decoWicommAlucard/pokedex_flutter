@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:palette_generator/palette_generator.dart';
@@ -61,7 +62,10 @@ class _PokeCardState extends State<PokeCard> {
               children: [
                 Hero(
                   tag: ValueKey(widget.pokemon.id),
-                  child: Image.network(widget.pokemon.imageUrl, height: 130),
+                  child: CachedNetworkImage(
+                    imageUrl: widget.pokemon.imageUrl,
+                    height: 130,
+                  ),
                 ),
                 Text(
                   widget.pokemon.name,

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:pokedex_flutter/models/pokemon.model.dart';
 
@@ -19,7 +20,7 @@ class DetailPage extends StatelessWidget {
             flexibleSpace: FlexibleSpaceBar(
               background: Hero(
                 tag: ValueKey(pokemon.id),
-                child: Image.network(pokemon.imageUrl),
+                child: CachedNetworkImage(imageUrl: pokemon.imageUrl),
               ),
             ),
           ),
