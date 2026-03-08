@@ -10,8 +10,8 @@ class PokeApiService {
     _uno = Uno(baseURL: "https://pokeapi.co/api/v2");
   }
 
-  Future<PokeResponse> getPokemon() async {
-    final response = await _uno.get("/pokemon");
+  Future<PokeResponse> getPokemon({required int offset}) async {
+    final response = await _uno.get("/pokemon?offset=$offset&limit=20");
 
     if (response.status != HttpStatus.ok) {
       throw Exception("Failed to load pokemon");

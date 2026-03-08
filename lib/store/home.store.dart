@@ -6,6 +6,10 @@ part 'home.store.g.dart';
 class HomeStore = HomeStoreBase with _$HomeStore;
 
 abstract class HomeStoreBase with Store {
+  final _service = PokeApiService();
+
+  int offset = 0;
+
   @observable
   bool isLoading = false;
 
@@ -16,8 +20,10 @@ abstract class HomeStoreBase with Store {
   Future<void> loadPokemons() async {
     isLoading = true;
 
-    final pokeResponse = await PokeApiService().getPokemon();
-    pokemons = pokeResponse.results.asObservable();
+    final pokeResponse = await _service.getPokemon(offset: offset);
+
+    offset += 20;
+    pokemons.addAll(pokeResponse.results);
 
     isLoading = false;
   }

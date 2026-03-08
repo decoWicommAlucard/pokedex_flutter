@@ -4,12 +4,38 @@ import 'package:pokedex_flutter/colors.dart';
 import 'package:pokedex_flutter/store/home.store.dart';
 import 'package:pokedex_flutter/widgets/poke_card.widget.dart';
 
-class HomePage extends StatelessWidget {
-  HomePage({super.key}) {
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final store = HomeStore();
+
+  final scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
     store.loadPokemons();
+    scrollController.addListener(scrollListener);
   }
 
-  final store = HomeStore();
+  @override
+  void dispose() {
+    scrollController.removeListener(scrollListener);
+    scrollController.dispose();
+    super.dispose();
+  }
+
+  void scrollListener() {
+    if (scrollController.offset >= scrollController.position.maxScrollExtent &&
+        !scrollController.position.outOfRange) {
+      store.loadPokemons();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,21 +92,22 @@ class HomePage extends StatelessWidget {
               Observer(
                 builder: (_) {
                   return Expanded(
-                    child: store.isLoading
-                        ? Center(child: CircularProgressIndicator())
-                        : GridView.builder(
-                            itemCount: store.pokemons.length,
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2,
-                                  crossAxisSpacing: 10,
-                                  mainAxisSpacing: 10,
-                                  childAspectRatio: 2 / 2.8,
-                                ),
-                            itemBuilder: (context, index) {
-                              return PokeCard(pokemon: store.pokemons[index]);
-                            },
-                          ),
+                    child: GridView.builder(
+                      controller: scrollController,
+                      itemCount: store.pokemons.length + 1,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 10,
+                        mainAxisSpacing: 10,
+                        childAspectRatio: 2 / 2.8,
+                      ),
+                      itemBuilder: (context, index) {
+                        if (index < store.pokemons.length) {
+                          return PokeCard(pokemon: store.pokemons[index]);
+                        }
+                        return Center(child: CircularProgressIndicator());
+                      },
+                    ),
                   );
                 },
               ),
