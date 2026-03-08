@@ -22,7 +22,13 @@ abstract class HomeStoreBase with Store {
     if (search == null || search!.isEmpty) {
       return pokemons.toList();
     }
-    return pokemons.where((pokemon) => pokemon.name.contains(search!)).toList();
+    return pokemons
+        .where(
+          (pokemon) =>
+              pokemon.name.toLowerCase().contains(search!.toLowerCase()) ||
+              pokemon.id == search,
+        )
+        .toList();
   }
 
   @action
