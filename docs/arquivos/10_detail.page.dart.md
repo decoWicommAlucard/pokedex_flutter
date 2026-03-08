@@ -2,37 +2,54 @@
 
 ## O que esse arquivo faz hoje
 
-`lib/pages/detail/detail.page.dart` existe, mas atualmente e apenas um placeholder.
+`lib/pages/detail/detail.page.dart` renderiza a tela de detalhe inicial do Pokemon selecionado na `HomePage`.
 
-## Codigo atual
+## O que a tela recebe
 
 ```dart
-class DetailPage extends StatelessWidget {
-  const DetailPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold();
-  }
-}
+final Pokemon pokemon;
 ```
 
-## O que isso significa
+A `HomePage` envia esse objeto quando o usuario toca em um card.
 
-- a tela de detalhe foi criada;
-- mas ainda nao possui layout;
-- ainda nao mostra dados de Pokemon;
-- ainda nao esta ligada a navegacao da `HomePage`.
+## Estrutura atual
 
-## Como essa tela provavelmente sera usada no futuro
+```dart
+return Scaffold(
+  body: CustomScrollView(
+    slivers: [
+      SliverAppBar(
+        backgroundColor: pokemon.color,
+        pinned: false,
+        floating: true,
+        collapsedHeight: 60,
+        expandedHeight: 300,
+        flexibleSpace: FlexibleSpaceBar(
+          background: Hero(
+            tag: ValueKey(pokemon.id),
+            child: CachedNetworkImage(imageUrl: pokemon.imageUrl),
+          ),
+        ),
+      ),
+    ],
+  ),
+);
+```
 
-1. o usuario toca em um card;
-2. a `HomePage` faz um `Navigator.push`;
-3. a `DetailPage` recebe um Pokemon ou um ID;
-4. a tela mostra imagem, nome, tipos e outras informacoes.
+## O que isso entrega
 
-## Ponto importante para estudo
+- fundo do `SliverAppBar` usando `pokemon.color`;
+- imagem oficial em destaque;
+- animacao `Hero` conectada ao card da lista;
+- estrutura pronta para crescer com mais secoes no `CustomScrollView`.
 
-Este arquivo ainda nao ajuda no funcionamento principal do app.
+## Como ela entra no fluxo do app
 
-Ele mostra apenas que a estrutura para uma futura tela de detalhe ja comecou.
+1. o usuario toca em um `PokeCard`;
+2. a `HomePage` faz `Navigator.push`;
+3. a `DetailPage` recebe o `Pokemon`;
+4. a mesma imagem e animada entre lista e detalhe via `Hero`.
+
+## Limitacao atual
+
+Essa tela ainda e inicial. Hoje ela mostra apenas o topo visual do Pokemon e nao busca dados adicionais da API, como tipos, habilidades ou stats.

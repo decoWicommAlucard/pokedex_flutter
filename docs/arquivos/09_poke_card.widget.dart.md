@@ -2,7 +2,7 @@
 
 ## O que esse arquivo faz
 
-`lib/widgets/poke_card.widget.dart` desenha cada card da grade de Pokemons.
+`lib/widgets/poke_card.widget.dart` desenha cada card da grade de Pokemons e descobre a cor dominante da imagem para pintar o fundo do item.
 
 ## O que o widget recebe
 
@@ -11,11 +11,12 @@ final Pokemon pokemon;
 final HomeStore store;
 ```
 
+- `pokemon` contem nome, id, imagem e cor atual do card;
+- `store` e usada para salvar a cor descoberta no item correto.
+
 ## Por que ele e `StatefulWidget`
 
-Porque ele executa uma logica assincrona no `initState` para descobrir a cor dominante da imagem.
-
-## Inicio do card
+O widget executa uma rotina assincrona no `initState` para calcular a paleta da imagem:
 
 ```dart
 @override
@@ -25,7 +26,7 @@ void initState() {
 }
 ```
 
-## Captura da cor dominante
+## Como a cor e descoberta
 
 ```dart
 Future<void> getPaletteColor() async {
@@ -42,16 +43,17 @@ Future<void> getPaletteColor() async {
 }
 ```
 
-## Passo a passo
+Fluxo:
 
-1. carrega a imagem do Pokemon;
-2. o `PaletteGenerator` analisa a imagem;
-3. pega a cor dominante;
-4. envia essa cor para a store;
-5. a store atualiza o Pokemon;
-6. o card muda na tela.
+1. a imagem oficial do Pokemon e carregada;
+2. o `PaletteGenerator` calcula a cor dominante;
+3. a store atualiza aquele Pokemon na lista observavel;
+4. o `Observer` reconstrui o card;
+5. o `AnimatedContainer` anima a troca de cor.
 
-## Parte visual principal
+## Estrutura visual
+
+O card usa o valor reativo de `widget.pokemon.color`:
 
 ```dart
 AnimatedContainer(
@@ -62,13 +64,22 @@ AnimatedContainer(
   ),
 ```
 
-## O que foi feito aqui
+A imagem fica dentro de um `Hero` e usa `CachedNetworkImage`:
 
-- o card comeca branco;
-- depois recebe a cor dominante;
-- a troca e animada em 500 milissegundos.
+```dart
+Hero(
+  tag: ValueKey(widget.pokemon.id),
+  child: CachedNetworkImage(
+    imageUrl: widget.pokemon.imageUrl,
+    height: 130,
+  ),
+)
+```
+
+Isso prepara a transicao para a `DetailPage` e evita recarregamentos desnecessarios da imagem.
 
 ## Outros detalhes
 
-- `Image.network` carrega a imagem online;
-- `widget.pokemon.id.padLeft(4, '0')` mostra o numero com zeros a esquerda.
+- `pokemon.color` comeca branco no model e depois muda para a cor dominante;
+- `widget.pokemon.id.padLeft(4, '0')` mostra o numero com zeros a esquerda;
+- o `Observer` faz o card reagir sem precisar de `setState()` para a cor.

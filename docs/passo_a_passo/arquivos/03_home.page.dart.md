@@ -16,6 +16,7 @@ Montar a tela principal com:
 Voce ja deve ter:
 
 - `HomeStore`;
+- `DetailPage`;
 - `PokeCard`;
 - `primaryColor`.
 
@@ -27,6 +28,7 @@ Adicione:
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pokedex_flutter/colors.dart';
+import 'package:pokedex_flutter/pages/detail/detail.page.dart';
 import 'package:pokedex_flutter/store/home.store.dart';
 import 'package:pokedex_flutter/widgets/poke_card.widget.dart';
 ```
@@ -127,7 +129,7 @@ TextField(
 )
 ```
 
-## Passo 9: usar `Observer` para reagir ao MobX
+## Passo 9: usar `Observer` para reagir ao MobX e abrir o detalhe
 
 Adicione um `Observer` com este miolo:
 
@@ -144,9 +146,20 @@ Expanded(
     ),
     itemBuilder: (context, index) {
       if (index < store.filteredPokemons.length) {
-        return PokeCard(
-          pokemon: store.filteredPokemons[index],
-          store: store,
+        final pokemon = store.filteredPokemons[index];
+
+        return InkWell(
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => DetailPage(pokemon: pokemon),
+              ),
+            );
+          },
+          child: PokeCard(
+            pokemon: pokemon,
+            store: store,
+          ),
         );
       }
       return store.isLoading
@@ -163,8 +176,9 @@ Expanded(
 2. busca dados assim que abre;
 3. recebe o texto da busca;
 4. mostra a lista filtrada;
-5. carrega mais itens ao chegar no fim;
-6. mostra spinner no ultimo item.
+5. abre a `DetailPage` ao tocar em um card;
+6. carrega mais itens ao chegar no fim;
+7. mostra spinner no ultimo item.
 
 ## Como verificar
 
@@ -173,4 +187,5 @@ Rode o app e confira:
 1. a tela abre com titulo e campo de busca;
 2. os primeiros Pokemons aparecem;
 3. a busca filtra os cards;
-4. ao rolar ate o fim, mais itens sao carregados.
+4. tocar em um card abre a tela de detalhe;
+5. ao rolar ate o fim, mais itens sao carregados.

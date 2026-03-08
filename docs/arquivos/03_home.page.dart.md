@@ -2,15 +2,7 @@
 
 ## O que esse arquivo faz
 
-`lib/pages/home/home.page.dart` monta a tela principal da Pokedex.
-
-Ele junta:
-
-- cabecalho;
-- campo de busca;
-- grade de Pokemons;
-- scroll infinito;
-- ligacao com a store.
+`lib/pages/home/home.page.dart` monta a tela principal da Pokedex e conecta interface, store, scroll infinito, busca e navegacao para a tela de detalhe.
 
 ## Objetos principais
 
@@ -19,12 +11,10 @@ final store = HomeStore();
 final scrollController = ScrollController();
 ```
 
-## O que cada um faz
+- `store` concentra a lista, o filtro, o carregamento e o estado reativo.
+- `scrollController` detecta quando o usuario chega ao fim da grade.
 
-- `store`: guarda estado e regras de negocio.
-- `scrollController`: monitora quando o usuario chega ao fim da lista.
-
-## O que acontece no inicio da tela
+## Inicio e encerramento da tela
 
 ```dart
 @override
@@ -35,13 +25,7 @@ void initState() {
 }
 ```
 
-### Passo a passo
-
-1. a tela e criada;
-2. chama `loadPokemons()` para buscar os primeiros itens;
-3. registra um listener no scroll.
-
-## O que acontece no final da vida da tela
+Assim que a tela abre, ela carrega a primeira pagina da API e registra o listener do scroll.
 
 ```dart
 @override
@@ -52,9 +36,9 @@ void dispose() {
 }
 ```
 
-Isso evita listener perdido e vazamento de memoria.
+O `dispose` remove o listener e libera o controller corretamente.
 
-## Campo de busca
+## Busca
 
 ```dart
 TextField(
@@ -65,30 +49,9 @@ TextField(
 )
 ```
 
-### Como foi feito
+O texto digitado vai para `store.search`, e o getter `filteredPokemons` recalcula a grade automaticamente.
 
-1. o usuario digita;
-2. `onChanged` dispara;
-3. a store recebe o texto;
-4. a lista filtrada e recalculada;
-5. a grade atualiza.
-
-## Grade dos cards
-
-```dart
-GridView.builder(
-  controller: scrollController,
-  itemCount: store.filteredPokemons.length + 1,
-  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-    crossAxisCount: 2,
-    crossAxisSpacing: 10,
-    mainAxisSpacing: 10,
-    childAspectRatio: 2 / 2.8,
-  ),
-)
-```
-
-## O papel do `Observer`
+## Grade observada pelo MobX
 
 ```dart
 Observer(
@@ -97,14 +60,50 @@ Observer(
       child: GridView.builder(
 ```
 
-O `Observer` faz a tela reagir a mudancas do MobX.
+Esse `Observer` escuta principalmente:
 
-Quando `filteredPokemons` ou `isLoading` mudam, essa parte da interface e reconstruida.
+- `store.filteredPokemons`;
+- `store.isLoading`.
 
-## O que foi feito aqui
+Quando esses valores mudam, a grade e o loader final sao reconstruidos.
 
-- carregamento inicial da lista;
-- campo de busca conectado a store;
+## Navegacao para detalhe
+
+Cada item da grade e encapsulado em um `InkWell`:
+
+```dart
+return InkWell(
+  onTap: () {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => DetailPage(pokemon: pokemon),
+      ),
+    );
+  },
+  child: PokeCard(pokemon: pokemon, store: store),
+);
+```
+
+Isso coloca a `DetailPage` dentro do fluxo principal do app. A tela de detalhe recebe o mesmo `Pokemon` que ja estava na lista.
+
+## Scroll infinito
+
+```dart
+void scrollListener() {
+  if (scrollController.offset >= scrollController.position.maxScrollExtent &&
+      !scrollController.position.outOfRange) {
+    store.loadPokemons();
+  }
+}
+```
+
+Quando o usuario chega ao fim da grade, a `HomeStore` busca mais 20 Pokemons.
+
+## O que esse arquivo entrega
+
+- cabecalho com titulo e subtitulo;
+- busca local por nome ou identificador;
 - grade com 2 cards por linha;
-- spinner no fim da lista;
-- scroll infinito com `ScrollController`.
+- loader no ultimo item da lista;
+- paginacao por scroll;
+- navegacao para a `DetailPage`.

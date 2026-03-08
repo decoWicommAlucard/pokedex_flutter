@@ -7,7 +7,7 @@ Ter um roteiro unico para refazer o projeto inteiro do zero.
 ## Ordem completa
 
 1. crie o projeto Flutter;
-2. instale `uno`, `mobx`, `flutter_mobx`, `palette_generator`, `build_runner` e `mobx_codegen`;
+2. instale `uno`, `mobx`, `flutter_mobx`, `palette_generator`, `cached_network_image`, `build_runner` e `mobx_codegen`;
 3. organize as pastas de `lib/`;
 4. crie `pokemon.model.dart`;
 5. crie `poke_response.model.dart`;
@@ -15,10 +15,10 @@ Ter um roteiro unico para refazer o projeto inteiro do zero.
 7. crie `home.store.dart`;
 8. gere `home.store.g.dart`;
 9. crie `colors.dart`;
-10. crie `home.page.dart`;
+10. crie `detail.page.dart`;
 11. crie `poke_card.widget.dart`;
-12. ajuste `main.dart` para abrir a `HomePage`;
-13. crie `detail.page.dart` como placeholder.
+12. crie `home.page.dart`;
+13. ajuste `main.dart` para abrir a `HomePage`.
 
 ## Funcionalidades que entram nessa ordem
 
@@ -56,6 +56,13 @@ Ter um roteiro unico para refazer o projeto inteiro do zero.
 - `updatePokemonColor`;
 - `AnimatedContainer`.
 
+### 6. Navegacao para detalhe
+
+- `DetailPage(pokemon: pokemon)`;
+- `InkWell` no card da grade;
+- `Hero` compartilhado entre lista e detalhe;
+- `SliverAppBar` com a cor do Pokemon.
+
 ## Como validar cada fase
 
 ### Fase 1
@@ -87,6 +94,7 @@ Refaca nesta sequencia:
 1. models;
 2. service;
 3. store;
-4. tela;
+4. detalhe;
 5. card;
-6. melhorias visuais.
+6. tela principal;
+7. melhorias visuais.

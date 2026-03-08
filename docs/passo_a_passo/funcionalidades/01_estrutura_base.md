@@ -13,7 +13,7 @@ flutter create pokedex_flutter
 ## Passo 2: instalar as dependencias
 
 ```bash
-flutter pub add uno mobx flutter_mobx palette_generator
+flutter pub add uno mobx flutter_mobx palette_generator cached_network_image
 flutter pub add --dev build_runner mobx_codegen
 ```
 

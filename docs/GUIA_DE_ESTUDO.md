@@ -25,6 +25,7 @@ Se quiser aprender recriando o projeto do zero, use tambem:
 8. [poke_card.widget.dart](arquivos/09_poke_card.widget.dart.md)
 9. [cores dos cards](funcionalidades/04_cores_dos_cards.md)
 10. [scroll infinito](funcionalidades/05_scroll_infinito.md)
+11. [detail.page.dart](arquivos/10_detail.page.dart.md)
 
 ## Documentacao por arquivo
 
@@ -54,4 +55,6 @@ Se quiser aprender recriando o projeto do zero, use tambem:
 
 ## Observacao importante
 
-A tela [10_detail.page.dart.md](arquivos/10_detail.page.dart.md) existe no projeto, mas hoje esta vazia e ainda nao foi integrada ao fluxo principal.
+A tela [10_detail.page.dart.md](arquivos/10_detail.page.dart.md) ja faz parte do fluxo principal: tocar em um card abre a `DetailPage`, que hoje mostra a imagem em destaque com `Hero`, `SliverAppBar` e a cor do Pokemon selecionado.
+
+Ela ainda e uma tela inicial, porque nao faz uma chamada extra para buscar detalhes completos como tipos, stats ou habilidades.

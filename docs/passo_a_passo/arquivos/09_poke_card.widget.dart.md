@@ -16,11 +16,13 @@ Voce ja deve ter:
 - `Pokemon`;
 - `HomeStore`;
 - `primaryColor`;
+- `cached_network_image` instalado;
 - `palette_generator` instalado.
 
 ## Passo 1: adicionar os imports
 
 ```dart
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:palette_generator/palette_generator.dart';
@@ -95,7 +97,13 @@ AnimatedContainer(
   child: Column(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
-      Image.network(widget.pokemon.imageUrl, height: 130),
+      Hero(
+        tag: ValueKey(widget.pokemon.id),
+        child: CachedNetworkImage(
+          imageUrl: widget.pokemon.imageUrl,
+          height: 130,
+        ),
+      ),
       Text(
         widget.pokemon.name,
         style: TextStyle(
@@ -130,10 +138,11 @@ void dispose() {
 ## O que foi feito aqui
 
 1. cada card recebe um Pokemon;
-2. a imagem e carregada;
-3. a cor dominante da imagem e calculada;
-4. a store atualiza a cor daquele Pokemon;
-5. o fundo do card muda com animacao.
+2. a imagem e carregada com cache;
+3. o `Hero` prepara a transicao para o detalhe;
+4. a cor dominante da imagem e calculada;
+5. a store atualiza a cor daquele Pokemon;
+6. o fundo do card muda com animacao.
 
 ## Como verificar
 
@@ -141,4 +150,5 @@ Rode o app e veja:
 
 1. o card aparece branco primeiro;
 2. depois muda de cor;
-3. mostra imagem, nome e numero do Pokemon.
+3. mostra imagem, nome e numero do Pokemon;
+4. a imagem participa da animacao ao abrir a tela de detalhe.

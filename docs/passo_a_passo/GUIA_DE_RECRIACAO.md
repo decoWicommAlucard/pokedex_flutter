@@ -28,10 +28,10 @@ Voce pode seguir de dois jeitos:
 5. [04_home.store.dart.md](arquivos/04_home.store.dart.md)
 6. [05_home.store.g.dart.md](arquivos/05_home.store.g.dart.md)
 7. [02_colors.dart.md](arquivos/02_colors.dart.md)
-8. [03_home.page.dart.md](arquivos/03_home.page.dart.md)
+8. [10_detail.page.dart.md](arquivos/10_detail.page.dart.md)
 9. [09_poke_card.widget.dart.md](arquivos/09_poke_card.widget.dart.md)
-10. [01_main.dart.md](arquivos/01_main.dart.md)
-11. [10_detail.page.dart.md](arquivos/10_detail.page.dart.md)
+10. [03_home.page.dart.md](arquivos/03_home.page.dart.md)
+11. [01_main.dart.md](arquivos/01_main.dart.md)
 
 ## Passo a passo por arquivo
 
@@ -60,3 +60,5 @@ Voce pode seguir de dois jeitos:
 O arquivo `home.store.g.dart` nao deve ser escrito manualmente.
 
 Ele precisa ser gerado pelo `build_runner`.
+
+Outro ponto importante: a recriacao desta pasta agora acompanha o codigo atual, entao a `DetailPage` ja recebe um `Pokemon` e a `HomePage` ja navega para ela.
