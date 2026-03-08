@@ -74,6 +74,7 @@ class _HomePageState extends State<HomePage> {
               SizedBox(height: 20),
 
               TextField(
+                onChanged: store.setSearch,
                 decoration: InputDecoration(
                   hintText: "Nome ou identificador",
                   hintStyle: TextStyle(color: Color(0xFFA1AAAF)),
@@ -94,7 +95,7 @@ class _HomePageState extends State<HomePage> {
                   return Expanded(
                     child: GridView.builder(
                       controller: scrollController,
-                      itemCount: store.pokemons.length + 1,
+                      itemCount: store.filteredPokemons.length + 1,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         crossAxisSpacing: 10,
@@ -102,10 +103,15 @@ class _HomePageState extends State<HomePage> {
                         childAspectRatio: 2 / 2.8,
                       ),
                       itemBuilder: (context, index) {
-                        if (index < store.pokemons.length) {
-                          return PokeCard(pokemon: store.pokemons[index]);
+                        if (index < store.filteredPokemons.length) {
+                          return PokeCard(
+                            pokemon: store.filteredPokemons[index],
+                            store: store,
+                          );
                         }
-                        return Center(child: CircularProgressIndicator());
+                        return store.isLoading
+                            ? Center(child: CircularProgressIndicator())
+                            : Container();
                       },
                     ),
                   );

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:pokedex_flutter/models/pokemon.model.dart';
 import 'package:pokedex_flutter/services/poke_api.service.dart';
@@ -14,6 +15,20 @@ abstract class HomeStoreBase with Store {
   bool isLoading = false;
 
   @observable
+  String? search;
+
+  @computed
+  List<Pokemon> get filteredPokemons {
+    if (search == null || search!.isEmpty) {
+      return pokemons.toList();
+    }
+    return pokemons.where((pokemon) => pokemon.name.contains(search!)).toList();
+  }
+
+  @action
+  void setSearch(String text) => search = text;
+
+  @observable
   ObservableList<Pokemon> pokemons = <Pokemon>[].asObservable();
 
   @action
@@ -26,5 +41,13 @@ abstract class HomeStoreBase with Store {
     pokemons.addAll(pokeResponse.results);
 
     isLoading = false;
+  }
+
+  @action
+  void updatePokemonColor({required String pokemonId, required Color color}) {
+    final indexPokemon = pokemons.indexWhere(
+      (pokemon) => pokemon.id == pokemonId,
+    );
+    pokemons[indexPokemon] = pokemons[indexPokemon].copyWith(color: color);
   }
 }
