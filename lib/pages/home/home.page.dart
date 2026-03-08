@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pokedex_flutter/colors.dart';
+import 'package:pokedex_flutter/pages/detail/detail.page.dart';
 import 'package:pokedex_flutter/store/home.store.dart';
 import 'package:pokedex_flutter/widgets/poke_card.widget.dart';
 
@@ -104,9 +105,17 @@ class _HomePageState extends State<HomePage> {
                       ),
                       itemBuilder: (context, index) {
                         if (index < store.filteredPokemons.length) {
-                          return PokeCard(
-                            pokemon: store.filteredPokemons[index],
-                            store: store,
+                          final pokemon = store.filteredPokemons[index];
+                          return InkWell(
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      DetailPage(pokemon: pokemon),
+                                ),
+                              );
+                            },
+                            child: PokeCard(pokemon: pokemon, store: store),
                           );
                         }
                         return store.isLoading

@@ -59,8 +59,10 @@ class _PokeCardState extends State<PokeCard> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.network(widget.pokemon.imageUrl, height: 130),
-
+                Hero(
+                  tag: ValueKey(widget.pokemon.id),
+                  child: Image.network(widget.pokemon.imageUrl, height: 130),
+                ),
                 Text(
                   widget.pokemon.name,
                   style: TextStyle(
