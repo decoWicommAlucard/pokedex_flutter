@@ -4,8 +4,8 @@ import 'package:pokedex_flutter/models/stat.model.dart';
 class PokemonDetails {
   final String name;
   final int id;
-  final double height;
-  final double weight;
+  final int height;
+  final int weight;
   final int baseExperience;
   final List<Stat>? stats;
   final List<PokemonType>? types;
