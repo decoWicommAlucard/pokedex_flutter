@@ -4,6 +4,8 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pokedex_flutter/colors.dart';
 import 'package:pokedex_flutter/models/pokemon.model.dart';
 import 'package:pokedex_flutter/pages/detail/stores/detail.store.dart';
+import 'package:pokedex_flutter/widgets/characteristc.widget.dart';
+import 'package:pokedex_flutter/widgets/percentage_indicator.widget.dart';
 
 class DetailPage extends StatelessWidget {
   final Pokemon pokemon;
@@ -79,6 +81,62 @@ class DetailPage extends StatelessWidget {
                                         .toList() ??
                                     <Widget>[]),
                               ],
+                            ),
+
+                            SizedBox(height: 20),
+
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Characteristc(
+                                  value: store.pokemonDetails!.height
+                                      .toString(),
+                                  name: "Height",
+                                ),
+                                Characteristc(
+                                  value: store.pokemonDetails!.baseExperience
+                                      .toString(),
+                                  name: "Experience",
+                                ),
+                                Characteristc(
+                                  value: store.pokemonDetails!.weight
+                                      .toString(),
+                                  name: "Weight",
+                                ),
+                              ],
+                            ),
+
+                            SizedBox(height: 20),
+
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                "Stats",
+                                style: TextStyle(
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold,
+                                  color: primaryColor,
+                                ),
+                              ),
+                            ),
+
+                            Divider(),
+
+                            ListView.builder(
+                              padding: EdgeInsets.zero,
+                              itemCount:
+                                  store.pokemonDetails?.stats?.length ?? 0,
+                              shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              itemBuilder: (ctx, index) {
+                                final stat =
+                                    store.pokemonDetails!.stats![index];
+                                return PercentageIndicator(
+                                  name: stat.stat.name,
+                                  value: stat.baseStat,
+                                  color: pokemon.color,
+                                );
+                              },
                             ),
                           ],
                         ),
