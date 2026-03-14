@@ -105,8 +105,8 @@ factory PokemonDetails.fromJson(Map<String, dynamic> data) {
   return PokemonDetails(
     name: data['name'],
     id: data['id'],
-    height: data['height'].toDouble(),
-    weight: data['weight'].toDouble(),
+    height: data['height'],
+    weight: data['weight'],
     baseExperience: data['base_experience'],
     stats: (data['stats'] != null ? data['stats'] as List<dynamic> : null)
         ?.map((stat) => Stat.fromJson(stat))

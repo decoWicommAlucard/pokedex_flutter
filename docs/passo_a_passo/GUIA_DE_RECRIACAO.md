@@ -32,14 +32,21 @@ Se voce sentiu falta do codigo no roteiro, use esta regra:
 1. [01_estrutura_base.md](funcionalidades/01_estrutura_base.md)
 2. [07_pokemon.model.dart.md](arquivos/07_pokemon.model.dart.md)
 3. [08_poke_response.model.dart.md](arquivos/08_poke_response.model.dart.md)
-4. [06_poke_api.service.dart.md](arquivos/06_poke_api.service.dart.md)
-5. [04_home.store.dart.md](arquivos/04_home.store.dart.md)
-6. [05_home.store.g.dart.md](arquivos/05_home.store.g.dart.md)
-7. [02_colors.dart.md](arquivos/02_colors.dart.md)
-8. [10_detail.page.dart.md](arquivos/10_detail.page.dart.md)
-9. [09_poke_card.widget.dart.md](arquivos/09_poke_card.widget.dart.md)
-10. [03_home.page.dart.md](arquivos/03_home.page.dart.md)
-11. [01_main.dart.md](arquivos/01_main.dart.md)
+4. [13_pokemon_stat.model.dart.md](arquivos/13_pokemon_stat.model.dart.md)
+5. [12_stat.model.dart.md](arquivos/12_stat.model.dart.md)
+6. [14_pokemon_type.model.dart.md](arquivos/14_pokemon_type.model.dart.md)
+7. [15_type.model.dart.md](arquivos/15_type.model.dart.md)
+8. [11_pokemon_details.model.dart.md](arquivos/11_pokemon_details.model.dart.md)
+9. [06_poke_api.service.dart.md](arquivos/06_poke_api.service.dart.md)
+10. [04_home.store.dart.md](arquivos/04_home.store.dart.md)
+11. [16_detail.store.dart.md](arquivos/16_detail.store.dart.md)
+12. [05_home.store.g.dart.md](arquivos/05_home.store.g.dart.md)
+13. [17_detail.store.g.dart.md](arquivos/17_detail.store.g.dart.md)
+14. [02_colors.dart.md](arquivos/02_colors.dart.md)
+15. [10_detail.page.dart.md](arquivos/10_detail.page.dart.md)
+16. [09_poke_card.widget.dart.md](arquivos/09_poke_card.widget.dart.md)
+17. [03_home.page.dart.md](arquivos/03_home.page.dart.md)
+18. [01_main.dart.md](arquivos/01_main.dart.md)
 
 ## Passo a passo por arquivo
 
@@ -53,6 +60,13 @@ Se voce sentiu falta do codigo no roteiro, use esta regra:
 - [08_poke_response.model.dart.md](arquivos/08_poke_response.model.dart.md)
 - [09_poke_card.widget.dart.md](arquivos/09_poke_card.widget.dart.md)
 - [10_detail.page.dart.md](arquivos/10_detail.page.dart.md)
+- [11_pokemon_details.model.dart.md](arquivos/11_pokemon_details.model.dart.md)
+- [12_stat.model.dart.md](arquivos/12_stat.model.dart.md)
+- [13_pokemon_stat.model.dart.md](arquivos/13_pokemon_stat.model.dart.md)
+- [14_pokemon_type.model.dart.md](arquivos/14_pokemon_type.model.dart.md)
+- [15_type.model.dart.md](arquivos/15_type.model.dart.md)
+- [16_detail.store.dart.md](arquivos/16_detail.store.dart.md)
+- [17_detail.store.g.dart.md](arquivos/17_detail.store.g.dart.md)
 
 ## Passo a passo por funcionalidade
 
@@ -62,6 +76,7 @@ Se voce sentiu falta do codigo no roteiro, use esta regra:
 - [04_scroll_infinito.md](funcionalidades/04_scroll_infinito.md)
 - [05_cores_dos_cards.md](funcionalidades/05_cores_dos_cards.md)
 - [06_recriacao_completa.md](funcionalidades/06_recriacao_completa.md)
+- [07_detalhes_do_pokemon.md](funcionalidades/07_detalhes_do_pokemon.md)
 
 ## Observacao importante
 
@@ -70,5 +85,3 @@ O arquivo `home.store.g.dart` nao deve ser escrito manualmente.
 Ele precisa ser gerado pelo `build_runner`.
 
 Outro ponto importante: a recriacao desta pasta agora acompanha o codigo atual, entao a `DetailPage` ja recebe um `Pokemon` e a `HomePage` ja navega para ela.
-
-A camada de detalhe mais completa, com `PokemonDetails`, `DetailStore` e endpoint `/pokemon/{id}`, ja existe no projeto atual e esta documentada na trilha principal em `docs/arquivos/` e `docs/funcionalidades/07_detalhes_do_pokemon.md`.

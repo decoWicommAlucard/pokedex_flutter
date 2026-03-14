@@ -24,12 +24,26 @@ Dentro de `lib/`, organize:
 ```text
 lib/
 |- models/
+|  |- pokemon.model.dart
+|  |- poke_response.model.dart
+|  |- pokemon_details.model.dart
+|  |- stat.model.dart
+|  |- pokemon_stat.model.dart
+|  |- pokemon_type.model.dart
+|  |- type.model.dart
 |- services/
+|  |- poke_api.service.dart
 |- store/
+|  |- home.store.dart
 |- widgets/
+|  |- poke_card.widget.dart
 |- pages/
    |- home/
+   |  |- home.page.dart
    |- detail/
+      |- detail.page.dart
+      |- stores/
+         |- detail.store.dart
 ```
 
 ## Passo 4: criar um `main.dart` minimo para abrir a app
@@ -66,15 +80,21 @@ Crie:
 - `colors.dart`
 - `models/pokemon.model.dart`
 - `models/poke_response.model.dart`
+- `models/pokemon_details.model.dart`
+- `models/stat.model.dart`
+- `models/pokemon_stat.model.dart`
+- `models/pokemon_type.model.dart`
+- `models/type.model.dart`
 - `services/poke_api.service.dart`
 - `store/home.store.dart`
 - `widgets/poke_card.widget.dart`
 - `pages/home/home.page.dart`
 - `pages/detail/detail.page.dart`
+- `pages/detail/stores/detail.store.dart`
 
 ## Passo 6: gerar a store do MobX
 
-Depois de terminar `home.store.dart`, rode:
+Depois de terminar `home.store.dart` e `detail.store.dart`, rode:
 
 ```bash
 dart run build_runner build
@@ -85,6 +105,8 @@ dart run build_runner build
 - [01_main.dart.md](../arquivos/01_main.dart.md)
 - [04_home.store.dart.md](../arquivos/04_home.store.dart.md)
 - [03_home.page.dart.md](../arquivos/03_home.page.dart.md)
+- [10_detail.page.dart.md](../arquivos/10_detail.page.dart.md)
+- [16_detail.store.dart.md](../arquivos/16_detail.store.dart.md)
 
 ## Resultado esperado
 

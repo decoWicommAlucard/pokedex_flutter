@@ -62,4 +62,4 @@ Future<void> getPokemonDetailsData(String id) async {
 
 Essa store ja esta sendo usada pela `DetailPage`.
 
-Hoje a tela observa `isLoading`, mas ainda nao renderiza os dados de `pokemonDetails` no corpo final.
+Hoje a tela observa `isLoading` e ja renderiza parte de `pokemonDetails`, como nome, ID e tipos.

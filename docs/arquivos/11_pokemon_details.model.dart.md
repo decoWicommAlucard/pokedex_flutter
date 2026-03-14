@@ -42,8 +42,8 @@ factory PokemonDetails.fromJson(Map<String, dynamic> data) {
   return PokemonDetails(
     name: data['name'],
     id: data['id'],
-    height: data['height'].toDouble(),
-    weight: data['weight'].toDouble(),
+    height: data['height'],
+    weight: data['weight'],
     baseExperience: data['base_experience'],
     stats: (data['stats'] != null ? data['stats'] as List<dynamic> : null)
         ?.map((stat) => Stat.fromJson(stat))
@@ -66,4 +66,10 @@ factory PokemonDetails.fromJson(Map<String, dynamic> data) {
 
 Hoje esse model ja pode ser carregado quando a `DetailPage` abre.
 
-A interface ainda nao desenha os campos de `pokemonDetails`, mas o carregamento ja acontece no fluxo atual.
+A interface ja usa parte de `pokemonDetails` para mostrar:
+
+- `name`;
+- `id`;
+- `types`.
+
+Ainda faltam campos como peso, altura, experiencia base e stats.
