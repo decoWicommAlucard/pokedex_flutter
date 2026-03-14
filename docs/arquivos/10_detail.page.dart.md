@@ -50,11 +50,39 @@ return Scaffold(
 
       Observer(
         builder: (ctx) {
+          final pokemonDetails = store.pokemonDetails;
+
           return store.isLoading
-              ? SliverToBoxAdapter(child: CircularProgressIndicator())
+              ? SliverToBoxAdapter(
+                  child: Center(child: CircularProgressIndicator()),
+                )
               : SliverPadding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  sliver: SliverToBoxAdapter(child: Container()),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 20,
+                  ),
+                  sliver: SliverToBoxAdapter(
+                    child: Column(
+                      children: [
+                        Text(pokemonDetails!.name.toUpperCase()),
+                        Text("#${store.pokemonDetails!.id}"),
+                        Wrap(
+                          spacing: 10,
+                          children: [
+                            ...(store.pokemonDetails?.types
+                                    ?.map(
+                                      (type) => Chip(
+                                        label: Text(type.name),
+                                        backgroundColor: pokemon.color,
+                                      ),
+                                    )
+                                    .toList() ??
+                                <Widget>[]),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                 );
         },
       ),
@@ -70,6 +98,9 @@ return Scaffold(
 - animacao `Hero` conectada ao card da lista;
 - disparo da busca de detalhe pela `DetailStore`;
 - observacao do loading com `Observer`;
+- exibicao do nome em caixa alta;
+- exibicao do numero da Pokedex;
+- exibicao dos tipos com `Chip`;
 - estrutura pronta para crescer com mais secoes no `CustomScrollView`.
 
 ## Como ela entra no fluxo do app
@@ -91,6 +122,12 @@ Aqui essa camada ja esta sendo usada para iniciar o carregamento quando a tela a
 
 ## Limitacao atual
 
-Hoje a `DetailPage` ja busca os detalhes e mostra estado de loading, mas ainda nao renderiza o conteudo de `pokemonDetails` no corpo da tela.
+Hoje a `DetailPage` ja busca os detalhes e ja renderiza parte de `pokemonDetails` no corpo da tela.
 
-Depois que o loading termina, o corpo ainda fica em um `Container()` vazio.
+No estado atual, ela mostra:
+
+- nome;
+- ID;
+- tipos.
+
+Ela ainda pode crescer para exibir peso, altura, experiencia base e stats.

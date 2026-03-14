@@ -18,6 +18,7 @@ lib/pages/detail/detail.page.dart
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:pokedex_flutter/colors.dart';
 import 'package:pokedex_flutter/models/pokemon.model.dart';
 import 'package:pokedex_flutter/pages/detail/stores/detail.store.dart';
 ```
@@ -60,11 +61,52 @@ Widget build(BuildContext context) {
 
         Observer(
           builder: (ctx) {
+            final pokemonDetails = store.pokemonDetails;
+
             return store.isLoading
-                ? SliverToBoxAdapter(child: CircularProgressIndicator())
+                ? SliverToBoxAdapter(
+                    child: Center(child: CircularProgressIndicator()),
+                  )
                 : SliverPadding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    sliver: SliverToBoxAdapter(child: Container()),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 20,
+                    ),
+                    sliver: SliverToBoxAdapter(
+                      child: Column(
+                        children: [
+                          Text(
+                            pokemonDetails!.name.toUpperCase(),
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: primaryColor,
+                            ),
+                          ),
+                          Text(
+                            "#${store.pokemonDetails!.id}",
+                            style: const TextStyle(
+                              fontSize: 16,
+                              color: primaryColor,
+                            ),
+                          ),
+                          SizedBox(height: 20),
+                          Wrap(
+                            spacing: 10,
+                            children: [
+                              ...(store.pokemonDetails?.types
+                                      ?.map(
+                                        (type) => Chip(
+                                          label: Text(type.name),
+                                          backgroundColor: pokemon.color,
+                                        ),
+                                      )
+                                      .toList() ??
+                                  <Widget>[]),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
                   );
           },
         ),
@@ -82,7 +124,8 @@ Widget build(BuildContext context) {
 4. a cor do topo vem de `pokemon.color`;
 5. a imagem reaproveita o mesmo `Hero` do card;
 6. o `Observer` escuta `isLoading`;
-7. a estrutura permite adicionar mais slivers depois.
+7. o corpo ja mostra nome, ID e tipos;
+8. a estrutura permite adicionar mais slivers depois.
 
 ## Como verificar
 
@@ -92,4 +135,4 @@ Se estiver certo:
 
 1. a tela de detalhe abre com a imagem animada e o topo colorido;
 2. o loading de detalhe e disparado;
-3. depois do loading, a area de conteudo ainda fica vazia, pronta para a proxima etapa.
+3. depois do loading, aparecem nome, numero e tipos do Pokemon.

@@ -226,7 +226,7 @@ ja permite buscar:
 - `loadPokemons()` nao impede chamadas simultaneas;
 - nao existe tratamento visual de erro;
 - a busca filtra apenas itens ja carregados;
-- a `DetailPage` ja faz a chamada de detalhe, mas ainda nao mostra `pokemonDetails` no corpo final.
+- a `DetailPage` ja faz a chamada de detalhe e ja mostra parte de `pokemonDetails`, mas ainda nao renderiza todos os campos do model.
 
 ## Resumo
 
@@ -237,4 +237,4 @@ O fluxo da API neste projeto agora tem duas frentes:
 3. o service fala com a PokeAPI;
 4. os models convertem a resposta;
 5. a listagem vira `Pokemon` e alimenta a grade;
-6. o detalhe vira `PokemonDetails` e ja alimenta o estado observado pela `DetailPage`.
+6. o detalhe vira `PokemonDetails` e ja alimenta a `DetailPage`, que hoje mostra nome, ID e tipos.

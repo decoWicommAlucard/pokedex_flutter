@@ -314,7 +314,13 @@ Hoje ela recebe um `Pokemon` e:
 
 Ela tambem cria uma `DetailStore`, dispara a busca de detalhe e observa `isLoading`.
 
-O que ainda falta e desenhar o conteudo de `pokemonDetails` no corpo final da tela.
+Hoje ela ja mostra parte de `pokemonDetails` no corpo:
+
+- nome;
+- numero;
+- tipos.
+
+O que ainda falta e desenhar o restante do model, como peso, altura, experiencia base e stats.
 
 ## Conceitos que costumam confundir
 
@@ -597,7 +603,8 @@ Exemplos no projeto:
 13. a `DetailPage` cria uma `DetailStore`;
 14. a tela chama `/pokemon/{id}`;
 15. o resultado dessa chamada vira `PokemonDetails`;
-16. o `Observer` acompanha o loading da tela.
+16. o `Observer` acompanha o loading da tela;
+17. a tela mostra nome, ID e tipos do Pokemon.
 
 ## Qual doc ler depois deste
 

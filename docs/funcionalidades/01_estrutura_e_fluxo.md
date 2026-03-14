@@ -198,7 +198,7 @@ Hoje essa tela ja faz duas partes do fluxo:
 - mostra o topo visual do Pokemon;
 - dispara a busca de detalhe com `DetailStore`.
 
-Depois disso, o corpo ainda nao desenha `pokemonDetails`.
+Depois disso, o corpo ja desenha parte de `pokemonDetails` com nome, ID e tipos.
 
 ## Limitacoes atuais
 
@@ -206,7 +206,7 @@ Depois disso, o corpo ainda nao desenha `pokemonDetails`.
 - `loadPokemons()` nao bloqueia chamadas duplicadas;
 - a busca vale apenas para os itens ja carregados;
 - a paginacao nao controla explicitamente o fim da lista;
-- a `DetailPage` ja usa `DetailStore`, mas ainda nao exibe peso, altura, tipos ou stats no corpo final.
+- a `DetailPage` ja usa `DetailStore` e ja exibe nome, ID e tipos, mas ainda nao mostra peso, altura, experiencia base ou stats.
 
 ## Resumo
 

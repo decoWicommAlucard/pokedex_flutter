@@ -80,4 +80,4 @@ Ao mesmo tempo, o projeto agora ja possui uma camada pronta para detalhes comple
 - [16_detail.store.dart.md](arquivos/16_detail.store.dart.md)
 - [07_detalhes_do_pokemon.md](funcionalidades/07_detalhes_do_pokemon.md)
 
-Hoje o loading dessa busca ja aparece na tela, mas o corpo final ainda nao renderiza `pokemonDetails`.
+Hoje essa tela ja mostra o loading e tambem renderiza nome, ID e tipos do Pokemon.

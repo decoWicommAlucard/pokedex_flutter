@@ -147,7 +147,13 @@ Hoje a `DetailPage` ja faz estas partes do fluxo:
 - carregamento via `DetailStore`;
 - `Observer` para acompanhar `isLoading`.
 
-Ainda falta a ultima etapa: renderizar o conteudo de `pokemonDetails` depois da requisicao.
+Depois da requisicao, ela ja renderiza:
+
+- `name` em caixa alta;
+- `id`;
+- lista de tipos com `Chip`.
+
+A proxima etapa natural e ampliar essa area com peso, altura, experiencia base e stats.
 
 ## Observacao sobre `type.model.dart`
 
@@ -164,4 +170,5 @@ O projeto agora ja tem:
 3. models auxiliares para stats e tipos;
 4. `DetailStore` carregando os dados ao abrir a tela;
 5. `DetailPage` observando o loading;
-6. corpo da tela ainda pronto para ser preenchido com `pokemonDetails`.
+6. corpo da tela ja mostrando nome, ID e tipos;
+7. espaco para evoluir o restante dos detalhes.
