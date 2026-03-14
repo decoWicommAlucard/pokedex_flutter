@@ -95,17 +95,19 @@ Fluxo inicial:
 6. o getter `filteredPokemons` e recalculado.
 7. o `Observer` da `HomePage` reconstrui a grade.
 
-## Fluxo de detalhe preparado
+## Fluxo de detalhe atual
 
 O projeto agora tambem possui uma segunda trilha de dados:
 
-1. a camada de detalhe pode chamar `DetailStore.getPokemonDetailsData(id)`;
-2. a `DetailStore` usa `_service.getPokemonDetail(id: id)`;
-3. `PokeApiService` faz `GET /pokemon/{id}`;
-4. a resposta JSON vira `PokemonDetails`;
-5. `stats` viram `Stat`;
-6. cada `Stat` guarda um `PokemonStat`;
-7. `types` viram `PokemonType`.
+1. a `DetailPage` cria `DetailStore`;
+2. a tela chama `getPokemonDetailsData(pokemon.id)`;
+3. a `DetailStore` usa `_service.getPokemonDetail(id: id)`;
+4. `PokeApiService` faz `GET /pokemon/{id}`;
+5. a resposta JSON vira `PokemonDetails`;
+6. `stats` viram `Stat`;
+7. cada `Stat` guarda um `PokemonStat`;
+8. `types` viram `PokemonType`;
+9. o `Observer` da tela acompanha `isLoading`.
 
 ## Fluxo reativo com MobX
 
@@ -191,9 +193,12 @@ A `DetailPage` ja faz parte do fluxo real:
 4. o `Hero` anima a imagem entre lista e detalhe;
 5. o `SliverAppBar` usa `pokemon.color` como fundo.
 
-Hoje a interface dessa tela ainda e inicial: ela mostra o topo visual do Pokemon.
+Hoje essa tela ja faz duas partes do fluxo:
 
-Ao mesmo tempo, a camada de dados detalhados ja existe com `DetailStore` e `PokemonDetails`, pronta para ser ligada nessa tela.
+- mostra o topo visual do Pokemon;
+- dispara a busca de detalhe com `DetailStore`.
+
+Depois disso, o corpo ainda nao desenha `pokemonDetails`.
 
 ## Limitacoes atuais
 
@@ -201,7 +206,7 @@ Ao mesmo tempo, a camada de dados detalhados ja existe com `DetailStore` e `Poke
 - `loadPokemons()` nao bloqueia chamadas duplicadas;
 - a busca vale apenas para os itens ja carregados;
 - a paginacao nao controla explicitamente o fim da lista;
-- a `DetailPage` ainda nao usa `DetailStore` para exibir tipos, stats ou habilidades.
+- a `DetailPage` ja usa `DetailStore`, mas ainda nao exibe peso, altura, tipos ou stats no corpo final.
 
 ## Resumo
 

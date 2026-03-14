@@ -10,7 +10,7 @@ Esse model e usado pela camada de detalhe:
 
 - `PokeApiService.getPokemonDetail(...)`;
 - `DetailStore`;
-- futura expansao da `DetailPage`.
+- carregamento disparado pela `DetailPage`.
 
 ## Estrutura da classe
 
@@ -18,8 +18,8 @@ Esse model e usado pela camada de detalhe:
 class PokemonDetails {
   final String name;
   final int id;
-  final double height;
-  final double weight;
+  final int height;
+  final int weight;
   final int baseExperience;
   final List<Stat>? stats;
   final List<PokemonType>? types;
@@ -64,4 +64,6 @@ factory PokemonDetails.fromJson(Map<String, dynamic> data) {
 
 ## Observacao importante
 
-Hoje esse model ja existe e ja pode ser carregado pela `DetailStore`, mas a `DetailPage` ainda nao consome esses dados na interface atual.
+Hoje esse model ja pode ser carregado quando a `DetailPage` abre.
+
+A interface ainda nao desenha os campos de `pokemonDetails`, mas o carregamento ja acontece no fluxo atual.

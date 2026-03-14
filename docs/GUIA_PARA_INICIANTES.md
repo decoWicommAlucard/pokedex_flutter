@@ -40,7 +40,8 @@ Lendo de forma simples:
 5. a resposta da API vira objetos Dart (`PokeResponse` e `Pokemon`);
 6. a tela mostra esses objetos usando `PokeCard`;
 7. ao tocar em um card, abre a `DetailPage`;
-8. o projeto ja tem uma `DetailStore` pronta para buscar `PokemonDetails`.
+8. a `DetailPage` cria uma `DetailStore`;
+9. a tela busca `PokemonDetails` pelo `id` do Pokemon.
 
 ## O que significa cada tipo de arquivo
 
@@ -305,13 +306,15 @@ Ela nao faz HTTP diretamente. Ela conversa com a `HomeStore`.
 
 E a tela de detalhe atual.
 
-Hoje ela ainda e simples. Ela recebe um `Pokemon` e mostra:
+Hoje ela recebe um `Pokemon` e:
 
 - a imagem em destaque;
 - o `Hero` da transicao;
 - o `SliverAppBar` com a cor do Pokemon.
 
-O projeto ja tem a camada de dados detalhados pronta, mas essa tela ainda nao consome a `DetailStore` na interface atual.
+Ela tambem cria uma `DetailStore`, dispara a busca de detalhe e observa `isLoading`.
+
+O que ainda falta e desenhar o conteudo de `pokemonDetails` no corpo final da tela.
 
 ## Conceitos que costumam confundir
 
@@ -566,7 +569,7 @@ Exemplo no projeto:
 
 - `DetailPage`.
 
-Ela so recebe um `Pokemon` e mostra a interface.
+Ela continua sendo `StatelessWidget`, mesmo usando uma `DetailStore`, porque nao guarda estado mutavel local no `State`.
 
 ### `StatefulWidget`
 
@@ -591,8 +594,10 @@ Exemplos no projeto:
 10. cada card descobre sua cor dominante;
 11. a store atualiza a cor com `copyWith`;
 12. ao tocar em um card, abre a `DetailPage`;
-13. a camada de detalhe ja pode consultar `/pokemon/{id}`;
-14. o resultado dessa chamada vira `PokemonDetails`.
+13. a `DetailPage` cria uma `DetailStore`;
+14. a tela chama `/pokemon/{id}`;
+15. o resultado dessa chamada vira `PokemonDetails`;
+16. o `Observer` acompanha o loading da tela.
 
 ## Qual doc ler depois deste
 

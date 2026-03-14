@@ -72,10 +72,12 @@ Se quiser aprender recriando o projeto do zero, use tambem:
 
 ## Observacao importante
 
-A tela [10_detail.page.dart.md](arquivos/10_detail.page.dart.md) continua sendo a entrada visual do detalhe.
+A tela [10_detail.page.dart.md](arquivos/10_detail.page.dart.md) continua sendo a entrada visual do detalhe e agora ja dispara o carregamento pela `DetailStore`.
 
 Ao mesmo tempo, o projeto agora ja possui uma camada pronta para detalhes completos com:
 
 - [11_pokemon_details.model.dart.md](arquivos/11_pokemon_details.model.dart.md)
 - [16_detail.store.dart.md](arquivos/16_detail.store.dart.md)
 - [07_detalhes_do_pokemon.md](funcionalidades/07_detalhes_do_pokemon.md)
+
+Hoje o loading dessa busca ja aparece na tela, mas o corpo final ainda nao renderiza `pokemonDetails`.

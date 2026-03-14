@@ -17,21 +17,26 @@ lib/pages/detail/detail.page.dart
 ```dart
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pokedex_flutter/models/pokemon.model.dart';
+import 'package:pokedex_flutter/pages/detail/stores/detail.store.dart';
 ```
 
-## Passo 3: criar a classe e receber o Pokemon
+## Passo 3: criar a classe, receber o Pokemon e instanciar a store
 
 ```dart
 class DetailPage extends StatelessWidget {
   final Pokemon pokemon;
+  final DetailStore store = DetailStore();
 
-  const DetailPage({super.key, required this.pokemon});
+  DetailPage({super.key, required this.pokemon}) {
+    store.getPokemonDetailsData(pokemon.id);
+  }
 ```
 
 ## Passo 4: montar o `Scaffold`
 
-Use um `CustomScrollView` com `SliverAppBar`:
+Use um `CustomScrollView` com `SliverAppBar` e um `Observer`:
 
 ```dart
 @override
@@ -52,6 +57,17 @@ Widget build(BuildContext context) {
             ),
           ),
         ),
+
+        Observer(
+          builder: (ctx) {
+            return store.isLoading
+                ? SliverToBoxAdapter(child: CircularProgressIndicator())
+                : SliverPadding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    sliver: SliverToBoxAdapter(child: Container()),
+                  );
+          },
+        ),
       ],
     ),
   );
@@ -61,12 +77,19 @@ Widget build(BuildContext context) {
 ## O que foi feito aqui
 
 1. a tela agora recebe um `Pokemon`;
-2. a cor do topo vem de `pokemon.color`;
-3. a imagem reaproveita o mesmo `Hero` do card;
-4. a estrutura permite adicionar mais slivers depois.
+2. a tela cria uma `DetailStore`;
+3. o carregamento de detalhe comeca com `store.getPokemonDetailsData(pokemon.id)`;
+4. a cor do topo vem de `pokemon.color`;
+5. a imagem reaproveita o mesmo `Hero` do card;
+6. o `Observer` escuta `isLoading`;
+7. a estrutura permite adicionar mais slivers depois.
 
 ## Como verificar
 
 Toque em um card na `HomePage`.
 
-Se estiver certo, a tela de detalhe abre com a imagem animada e o topo colorido.
+Se estiver certo:
+
+1. a tela de detalhe abre com a imagem animada e o topo colorido;
+2. o loading de detalhe e disparado;
+3. depois do loading, a area de conteudo ainda fica vazia, pronta para a proxima etapa.

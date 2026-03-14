@@ -18,10 +18,27 @@ Este guia mostra a nova camada de detalhe adicionada ao projeto para buscar dado
 
 ## Visao geral do fluxo
 
-Hoje o projeto tem duas camadas relacionadas ao detalhe:
+Hoje o fluxo de detalhe funciona assim:
 
-1. a navegacao visual, ja usada pela `DetailPage`;
-2. a busca de detalhes completos, ja preparada pela `DetailStore`.
+1. a `HomePage` abre a `DetailPage`;
+2. a `DetailPage` recebe um `Pokemon`;
+3. a `DetailPage` cria uma `DetailStore`;
+4. a tela chama `store.getPokemonDetailsData(pokemon.id)`;
+5. a `DetailStore` usa o service;
+6. o service chama `/pokemon/{id}`;
+7. a resposta vira `PokemonDetails`.
+
+## Como a `DetailPage` aciona a store
+
+```dart
+final DetailStore store = DetailStore();
+
+DetailPage({super.key, required this.pokemon}) {
+  store.getPokemonDetailsData(pokemon.id);
+}
+```
+
+Isso faz a busca comecar assim que a tela e criada.
 
 ## Chamada HTTP de detalhe
 
@@ -121,14 +138,16 @@ No detalhe:
 
 ## Estado atual da interface
 
-Hoje a `DetailPage` ainda mostra apenas a parte visual inicial:
+Hoje a `DetailPage` ja faz estas partes do fluxo:
 
 - `Hero`;
 - `SliverAppBar`;
 - imagem;
-- cor do Pokemon vindo da lista.
+- cor do Pokemon vindo da lista;
+- carregamento via `DetailStore`;
+- `Observer` para acompanhar `isLoading`.
 
-Mas o codigo ja possui a base pronta para expandir a tela com dados detalhados.
+Ainda falta a ultima etapa: renderizar o conteudo de `pokemonDetails` depois da requisicao.
 
 ## Observacao sobre `type.model.dart`
 
@@ -143,5 +162,6 @@ O projeto agora ja tem:
 1. endpoint de detalhe no service;
 2. model principal `PokemonDetails`;
 3. models auxiliares para stats e tipos;
-4. `DetailStore` pronta para carregar os dados;
-5. `DetailPage` pronta para ser expandida com essa informacao.
+4. `DetailStore` carregando os dados ao abrir a tela;
+5. `DetailPage` observando o loading;
+6. corpo da tela ainda pronto para ser preenchido com `pokemonDetails`.

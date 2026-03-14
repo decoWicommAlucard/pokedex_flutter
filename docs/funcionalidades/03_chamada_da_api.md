@@ -32,7 +32,8 @@ Este guia acompanha o caminho completo da listagem da PokeAPI ate a interface.
 8. o `Observer` reconstrui a grade.
 9. o `PokeCard` exibe nome, numero e imagem.
 10. ao tocar no card, a `DetailPage` recebe o mesmo `Pokemon`.
-11. a camada de detalhe ja pode consultar `/pokemon/{id}` com `DetailStore`.
+11. a `DetailPage` cria a `DetailStore`;
+12. a tela consulta `/pokemon/{id}` ao abrir.
 
 ## Quem dispara a chamada
 
@@ -181,7 +182,7 @@ final pokeResponse = await _service.getPokemonDetail(id: id);
 pokemonDetails = pokeResponse;
 ```
 
-Ou seja, o backend de detalhe ja existe no codigo, mesmo que a UI ainda nao o renderize.
+Ou seja, a chamada de detalhe ja faz parte do fluxo real da tela.
 
 ## O que a rota de listagem entrega
 
@@ -225,7 +226,7 @@ ja permite buscar:
 - `loadPokemons()` nao impede chamadas simultaneas;
 - nao existe tratamento visual de erro;
 - a busca filtra apenas itens ja carregados;
-- a `DetailPage` ainda nao usa a `DetailStore` na UI atual.
+- a `DetailPage` ja faz a chamada de detalhe, mas ainda nao mostra `pokemonDetails` no corpo final.
 
 ## Resumo
 
@@ -236,4 +237,4 @@ O fluxo da API neste projeto agora tem duas frentes:
 3. o service fala com a PokeAPI;
 4. os models convertem a resposta;
 5. a listagem vira `Pokemon` e alimenta a grade;
-6. o detalhe pode virar `PokemonDetails` e alimentar a futura expansao da `DetailPage`.
+6. o detalhe vira `PokemonDetails` e ja alimenta o estado observado pela `DetailPage`.
