@@ -16,8 +16,16 @@ O foco e:
 
 Voce pode seguir de dois jeitos:
 
-- por arquivo, em `docs/passo_a_passo/arquivos/`;
-- por funcionalidade, em `docs/passo_a_passo/funcionalidades/`.
+- por arquivo, em `docs/passo_a_passo/arquivos/`, quando quiser ver o arquivo inteiro;
+- por funcionalidade, em `docs/passo_a_passo/funcionalidades/`, quando quiser montar o projeto em blocos com trechos de codigo.
+
+## Onde esta o codigo
+
+Se voce sentiu falta do codigo no roteiro, use esta regra:
+
+- `arquivos/` mostra o conteudo completo de cada arquivo;
+- `funcionalidades/` mostra a ordem de implementacao com os trechos principais;
+- `06_recriacao_completa.md` junta a ordem geral e aponta para os arquivos certos.
 
 ## Ordem recomendada para recriar o projeto inteiro
 

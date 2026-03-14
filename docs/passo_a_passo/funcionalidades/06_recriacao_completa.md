@@ -20,6 +20,27 @@ Ter um roteiro unico para refazer o projeto inteiro do zero.
 12. crie `home.page.dart`;
 13. ajuste `main.dart` para abrir a `HomePage`.
 
+## Ordem completa com codigo
+
+Se quiser seguir o projeto inteiro sem procurar onde esta cada trecho, use esta sequencia:
+
+- Estrutura inicial: [01_estrutura_base.md](01_estrutura_base.md)
+- Models: [07_pokemon.model.dart.md](../arquivos/07_pokemon.model.dart.md) e [08_poke_response.model.dart.md](../arquivos/08_poke_response.model.dart.md)
+- Service: [06_poke_api.service.dart.md](../arquivos/06_poke_api.service.dart.md)
+- Store: [04_home.store.dart.md](../arquivos/04_home.store.dart.md), depois gere [05_home.store.g.dart.md](../arquivos/05_home.store.g.dart.md)
+- Cores e detalhe: [02_colors.dart.md](../arquivos/02_colors.dart.md) e [10_detail.page.dart.md](../arquivos/10_detail.page.dart.md)
+- Card e tela principal: [09_poke_card.widget.dart.md](../arquivos/09_poke_card.widget.dart.md), [03_home.page.dart.md](../arquivos/03_home.page.dart.md) e [01_main.dart.md](../arquivos/01_main.dart.md)
+
+## Passo a passo por funcionalidade com trechos de codigo
+
+Se preferir montar o projeto por fases, siga nesta ordem:
+
+1. [01_estrutura_base.md](01_estrutura_base.md)
+2. [02_chamada_da_api.md](02_chamada_da_api.md)
+3. [03_filtragem.md](03_filtragem.md)
+4. [04_scroll_infinito.md](04_scroll_infinito.md)
+5. [05_cores_dos_cards.md](05_cores_dos_cards.md)
+
 ## Funcionalidades que entram nessa ordem
 
 ### 1. API
@@ -62,6 +83,14 @@ Ter um roteiro unico para refazer o projeto inteiro do zero.
 - `InkWell` no card da grade;
 - `Hero` compartilhado entre lista e detalhe;
 - `SliverAppBar` com a cor do Pokemon.
+
+## Comandos da recriacao
+
+```bash
+flutter pub get
+dart run build_runner build
+flutter run
+```
 
 ## Como validar cada fase
 

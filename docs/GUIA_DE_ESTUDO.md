@@ -2,6 +2,10 @@
 
 A documentacao foi separada em varios arquivos menores para facilitar o estudo.
 
+Se voce ainda nao entende bem termos como `model`, `fromJson`, `copyWith`, `store` ou `service`, comece por:
+
+- [GUIA_PARA_INICIANTES.md](GUIA_PARA_INICIANTES.md)
+
 Voce pode ler de dois jeitos:
 
 - por arquivo, em `docs/arquivos/`;
@@ -15,17 +19,18 @@ Se quiser aprender recriando o projeto do zero, use tambem:
 
 ## Ordem recomendada
 
-1. [Visao geral e fluxo](funcionalidades/01_estrutura_e_fluxo.md)
-2. [main.dart](arquivos/01_main.dart.md)
-3. [home.page.dart](arquivos/03_home.page.dart.md)
-4. [home.store.dart](arquivos/04_home.store.dart.md)
-5. [filtragem](funcionalidades/02_filtragem.md)
-6. [chamada da API](funcionalidades/03_chamada_da_api.md)
-7. [pokemon.model.dart](arquivos/07_pokemon.model.dart.md)
-8. [poke_card.widget.dart](arquivos/09_poke_card.widget.dart.md)
-9. [cores dos cards](funcionalidades/04_cores_dos_cards.md)
-10. [scroll infinito](funcionalidades/05_scroll_infinito.md)
-11. [detail.page.dart](arquivos/10_detail.page.dart.md)
+1. [GUIA_PARA_INICIANTES.md](GUIA_PARA_INICIANTES.md)
+2. [Visao geral e fluxo](funcionalidades/01_estrutura_e_fluxo.md)
+3. [main.dart](arquivos/01_main.dart.md)
+4. [home.page.dart](arquivos/03_home.page.dart.md)
+5. [home.store.dart](arquivos/04_home.store.dart.md)
+6. [filtragem](funcionalidades/02_filtragem.md)
+7. [chamada da API](funcionalidades/03_chamada_da_api.md)
+8. [pokemon.model.dart](arquivos/07_pokemon.model.dart.md)
+9. [poke_card.widget.dart](arquivos/09_poke_card.widget.dart.md)
+10. [cores dos cards](funcionalidades/04_cores_dos_cards.md)
+11. [scroll infinito](funcionalidades/05_scroll_infinito.md)
+12. [detail.page.dart](arquivos/10_detail.page.dart.md)
 
 ## Documentacao por arquivo
 

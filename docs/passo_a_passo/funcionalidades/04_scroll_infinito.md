@@ -17,7 +17,12 @@ final scrollController = ScrollController();
 No `initState`:
 
 ```dart
-scrollController.addListener(scrollListener);
+@override
+void initState() {
+  super.initState();
+  store.loadPokemons();
+  scrollController.addListener(scrollListener);
+}
 ```
 
 ## Passo 3: criar o metodo `scrollListener`
@@ -33,7 +38,18 @@ void scrollListener() {
 }
 ```
 
-## Passo 4: passar o controller para o `GridView`
+## Passo 4: limpar o listener no `dispose`
+
+```dart
+@override
+void dispose() {
+  scrollController.removeListener(scrollListener);
+  scrollController.dispose();
+  super.dispose();
+}
+```
+
+## Passo 5: passar o controller para o `GridView`
 
 ```dart
 GridView.builder(
@@ -41,7 +57,7 @@ GridView.builder(
 )
 ```
 
-## Passo 5: preparar a store para paginacao
+## Passo 6: preparar a store para paginacao
 
 Na `HomeStore`:
 
@@ -50,12 +66,61 @@ Na `HomeStore`:
 3. depois use `offset += 20;`
 4. adicione os novos itens com `addAll`.
 
-## Passo 6: criar o loader do final
+```dart
+int offset = 0;
+
+@observable
+bool isLoading = false;
+
+@action
+Future<void> loadPokemons() async {
+  isLoading = true;
+
+  final pokeResponse = await _service.getPokemon(offset: offset);
+
+  offset += 20;
+  pokemons.addAll(pokeResponse.results);
+
+  isLoading = false;
+}
+```
+
+## Passo 7: criar o loader do final
 
 Na grade:
 
 1. use `itemCount: store.filteredPokemons.length + 1;`
 2. no ultimo item, mostre o `CircularProgressIndicator` quando `isLoading` for `true`.
+
+```dart
+Expanded(
+  child: GridView.builder(
+    controller: scrollController,
+    itemCount: store.filteredPokemons.length + 1,
+    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      crossAxisCount: 2,
+      crossAxisSpacing: 10,
+      mainAxisSpacing: 10,
+      childAspectRatio: 2 / 2.8,
+    ),
+    itemBuilder: (context, index) {
+      if (index < store.filteredPokemons.length) {
+        final pokemon = store.filteredPokemons[index];
+        return PokeCard(pokemon: pokemon, store: store);
+      }
+
+      return store.isLoading
+          ? Center(child: CircularProgressIndicator())
+          : Container();
+    },
+  ),
+)
+```
+
+## Arquivos com codigo completo desta fase
+
+- [04_home.store.dart.md](../arquivos/04_home.store.dart.md)
+- [03_home.page.dart.md](../arquivos/03_home.page.dart.md)
 
 ## Como verificar
 

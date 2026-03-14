@@ -32,7 +32,33 @@ lib/
    |- detail/
 ```
 
-## Passo 4: criar os arquivos base
+## Passo 4: criar um `main.dart` minimo para abrir a app
+
+Use este ponto de partida:
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:pokedex_flutter/pages/home/home.page.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Pokedex',
+      debugShowCheckedModeBanner: false,
+      home: HomePage(),
+    );
+  }
+}
+```
+
+## Passo 5: criar os arquivos base
 
 Crie:
 
@@ -46,13 +72,19 @@ Crie:
 - `pages/home/home.page.dart`
 - `pages/detail/detail.page.dart`
 
-## Passo 5: gerar a store do MobX
+## Passo 6: gerar a store do MobX
 
 Depois de terminar `home.store.dart`, rode:
 
 ```bash
 dart run build_runner build
 ```
+
+## Arquivos com codigo completo desta fase
+
+- [01_main.dart.md](../arquivos/01_main.dart.md)
+- [04_home.store.dart.md](../arquivos/04_home.store.dart.md)
+- [03_home.page.dart.md](../arquivos/03_home.page.dart.md)
 
 ## Resultado esperado
 
