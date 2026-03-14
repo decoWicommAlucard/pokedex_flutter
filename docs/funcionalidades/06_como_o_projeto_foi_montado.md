@@ -40,6 +40,7 @@ dependencies:
   flutter_mobx: ^2.3.0
   palette_generator: ^0.3.3+2
   cached_network_image: ^3.4.1
+  percent_indicator: ^4.2.3
 ```
 
 ```yaml
@@ -51,7 +52,7 @@ dev_dependencies:
 Comandos equivalentes:
 
 ```bash
-flutter pub add uno mobx flutter_mobx palette_generator cached_network_image
+flutter pub add uno mobx flutter_mobx palette_generator cached_network_image percent_indicator
 flutter pub add --dev build_runner mobx_codegen
 ```
 
@@ -61,7 +62,8 @@ Motivos:
 - `mobx` e `flutter_mobx` para estado reativo;
 - `palette_generator` para colorir os cards;
 - `cached_network_image` para exibir e reaproveitar imagens;
-- `build_runner` e `mobx_codegen` para gerar a store.
+- `percent_indicator` para desenhar as barras de stats;
+- `build_runner` e `mobx_codegen` para gerar as stores.
 
 ## 3. Criacao dos models
 
@@ -152,9 +154,10 @@ Ela concentra:
 
 ## 6. Geracao do arquivo do MobX
 
-Arquivo gerado:
+Arquivos gerados:
 
 - `lib/store/home.store.g.dart`
+- `lib/pages/detail/stores/detail.store.g.dart`
 
 Comando:
 
@@ -186,13 +189,23 @@ No codigo atual, a tela:
 - reaproveita a imagem via `Hero`;
 - usa `pokemon.color` como fundo do topo.
 
-Ela ainda e simples, mas ja faz parte do fluxo real do app.
+Hoje ela ja esta finalizada e mostra:
 
-Hoje existe tambem uma camada adicional pronta para expandir essa tela:
+- nome e ID;
+- tipos com `Chip`;
+- altura, experiencia e peso com `Characteristc`;
+- stats com `PercentageIndicator`.
+
+Para isso, a tela depende diretamente de:
 
 - `DetailStore`;
 - `PokemonDetails`;
 - endpoint `/pokemon/{id}`.
+
+E o projeto ganhou tambem dois widgets reutilizaveis para a area de detalhe:
+
+- `lib/widgets/characteristc.widget.dart`;
+- `lib/widgets/percentage_indicator.widget.dart`.
 
 ## 9. Montagem da `HomePage`
 
@@ -265,9 +278,11 @@ Isso fecha o fluxo para o app iniciar direto na Pokedex.
 7. `home.store.g.dart`
 8. `colors.dart`
 9. `detail.page.dart`
-10. `poke_card.widget.dart`
-11. `home.page.dart`
-12. `main.dart`
+10. `characteristc.widget.dart`
+11. `percentage_indicator.widget.dart`
+12. `poke_card.widget.dart`
+13. `home.page.dart`
+14. `main.dart`
 
 ## O que esse projeto ensina
 
@@ -279,7 +294,8 @@ Isso fecha o fluxo para o app iniciar direto na Pokedex.
 - filtro local;
 - extracao de cor;
 - navegacao com `Hero`;
-- preparacao de uma camada de detalhe com endpoint proprio.
+- composicao de widgets pequenos para a tela de detalhe;
+- camada de detalhe completa com endpoint proprio.
 
 ## Resumo
 

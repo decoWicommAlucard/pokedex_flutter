@@ -18,6 +18,8 @@ Este guia acompanha o caminho completo da listagem da PokeAPI ate a interface.
 - `lib/models/stat.model.dart`
 - `lib/models/pokemon_stat.model.dart`
 - `lib/models/pokemon_type.model.dart`
+- `lib/widgets/characteristc.widget.dart`
+- `lib/widgets/percentage_indicator.widget.dart`
 - `lib/widgets/poke_card.widget.dart`
 
 ## Visao geral do fluxo
@@ -184,6 +186,11 @@ pokemonDetails = pokeResponse;
 
 Ou seja, a chamada de detalhe ja faz parte do fluxo real da tela.
 
+Depois da resposta chegar, a tela usa:
+
+- `Characteristc` para `height`, `baseExperience` e `weight`;
+- `PercentageIndicator` para cada item de `stats`.
+
 ## O que a rota de listagem entrega
 
 A rota usada hoje e:
@@ -225,8 +232,7 @@ ja permite buscar:
 
 - `loadPokemons()` nao impede chamadas simultaneas;
 - nao existe tratamento visual de erro;
-- a busca filtra apenas itens ja carregados;
-- a `DetailPage` ja faz a chamada de detalhe e ja mostra parte de `pokemonDetails`, mas ainda nao renderiza todos os campos do model.
+- a busca filtra apenas itens ja carregados.
 
 ## Resumo
 
@@ -237,4 +243,4 @@ O fluxo da API neste projeto agora tem duas frentes:
 3. o service fala com a PokeAPI;
 4. os models convertem a resposta;
 5. a listagem vira `Pokemon` e alimenta a grade;
-6. o detalhe vira `PokemonDetails` e ja alimenta a `DetailPage`, que hoje mostra nome, ID e tipos.
+6. o detalhe vira `PokemonDetails` e alimenta a `DetailPage`, que mostra nome, ID, tipos, caracteristicas e stats.

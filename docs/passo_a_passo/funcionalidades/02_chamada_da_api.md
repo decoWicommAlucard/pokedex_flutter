@@ -234,7 +234,7 @@ DetailPage({super.key, required this.pokemon}) {
 }
 ```
 
-## Passo 10: renderizar nome, ID e tipos na `DetailPage`
+## Passo 10: renderizar o detalhe completo na `DetailPage`
 
 Use um `Observer` com:
 
@@ -266,6 +266,36 @@ return store.isLoading
                       <Widget>[]),
                 ],
               ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Characteristc(
+                    value: store.pokemonDetails!.height.toString(),
+                    name: "Height",
+                  ),
+                  Characteristc(
+                    value: store.pokemonDetails!.baseExperience.toString(),
+                    name: "Experience",
+                  ),
+                  Characteristc(
+                    value: store.pokemonDetails!.weight.toString(),
+                    name: "Weight",
+                  ),
+                ],
+              ),
+              ListView.builder(
+                itemCount: store.pokemonDetails?.stats?.length ?? 0,
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemBuilder: (ctx, index) {
+                  final stat = store.pokemonDetails!.stats![index];
+                  return PercentageIndicator(
+                    name: stat.stat.name,
+                    value: stat.baseStat,
+                    color: pokemon.color,
+                  );
+                },
+              ),
             ],
           ),
         ),
@@ -286,10 +316,12 @@ return store.isLoading
 - [15_type.model.dart.md](../arquivos/15_type.model.dart.md)
 - [16_detail.store.dart.md](../arquivos/16_detail.store.dart.md)
 - [17_detail.store.g.dart.md](../arquivos/17_detail.store.g.dart.md)
+- [18_characteristc.widget.dart.md](../arquivos/18_characteristc.widget.dart.md)
+- [19_percentage_indicator.widget.dart.md](../arquivos/19_percentage_indicator.widget.dart.md)
 - [10_detail.page.dart.md](../arquivos/10_detail.page.dart.md)
 
 ## Como verificar
 
 1. ao abrir o app, os primeiros 20 Pokemons devem aparecer;
 2. ao tocar em um card, a `DetailPage` deve buscar os detalhes;
-3. depois do loading, nome, ID e tipos devem aparecer.
+3. depois do loading, nome, ID, tipos, caracteristicas e stats devem aparecer.

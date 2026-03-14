@@ -90,4 +90,4 @@ Future<PokemonDetails> getPokemonDetail({required String id}) async {
 ## Como verificar
 
 1. quando a `HomeStore` chamar `getPokemon`, o app deve buscar 20 Pokemons por vez;
-2. quando a `DetailStore` chamar `getPokemonDetail`, a `DetailPage` deve conseguir mostrar nome, ID e tipos.
+2. quando a `DetailStore` chamar `getPokemonDetail`, a `DetailPage` deve conseguir mostrar nome, ID, tipos, caracteristicas e stats.

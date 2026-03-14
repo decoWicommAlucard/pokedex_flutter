@@ -66,10 +66,12 @@ factory PokemonDetails.fromJson(Map<String, dynamic> data) {
 
 Hoje esse model ja pode ser carregado quando a `DetailPage` abre.
 
-A interface ja usa parte de `pokemonDetails` para mostrar:
+A interface ja usa `pokemonDetails` para mostrar:
 
 - `name`;
 - `id`;
-- `types`.
-
-Ainda faltam campos como peso, altura, experiencia base e stats.
+- `types`;
+- `height`;
+- `baseExperience`;
+- `weight`;
+- `stats`.

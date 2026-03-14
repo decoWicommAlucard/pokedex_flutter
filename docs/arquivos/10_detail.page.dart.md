@@ -2,7 +2,22 @@
 
 ## O que esse arquivo faz hoje
 
-`lib/pages/detail/detail.page.dart` renderiza a tela de detalhe do Pokemon selecionado na `HomePage` e ja dispara o carregamento dos dados detalhados.
+`lib/pages/detail/detail.page.dart` renderiza a tela final de detalhe do Pokemon selecionado na `HomePage`.
+
+## Imports principais
+
+```dart
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:pokedex_flutter/pages/detail/stores/detail.store.dart';
+import 'package:pokedex_flutter/widgets/characteristc.widget.dart';
+import 'package:pokedex_flutter/widgets/percentage_indicator.widget.dart';
+```
+
+Esses imports mostram que a tela:
+
+- observa o estado com MobX;
+- busca dados pela `DetailStore`;
+- quebra partes visuais em widgets menores.
 
 ## O que a tela recebe
 
@@ -66,19 +81,18 @@ return Scaffold(
                       children: [
                         Text(pokemonDetails!.name.toUpperCase()),
                         Text("#${store.pokemonDetails!.id}"),
-                        Wrap(
-                          spacing: 10,
+                        Wrap(...types),
+                        Row(
                           children: [
-                            ...(store.pokemonDetails?.types
-                                    ?.map(
-                                      (type) => Chip(
-                                        label: Text(type.name),
-                                        backgroundColor: pokemon.color,
-                                      ),
-                                    )
-                                    .toList() ??
-                                <Widget>[]),
+                            Characteristc(...),
+                            Characteristc(...),
+                            Characteristc(...),
                           ],
+                        ),
+                        ListView.builder(
+                          itemBuilder: (ctx, index) {
+                            return PercentageIndicator(...);
+                          },
                         ),
                       ],
                     ),
@@ -101,33 +115,34 @@ return Scaffold(
 - exibicao do nome em caixa alta;
 - exibicao do numero da Pokedex;
 - exibicao dos tipos com `Chip`;
-- estrutura pronta para crescer com mais secoes no `CustomScrollView`.
+- exibicao de altura, experiencia e peso com `Characteristc`;
+- exibicao da lista de stats com `PercentageIndicator`.
 
 ## Como ela entra no fluxo do app
 
 1. o usuario toca em um `PokeCard`;
 2. a `HomePage` faz `Navigator.push`;
 3. a `DetailPage` recebe o `Pokemon`;
-4. a mesma imagem e animada entre lista e detalhe via `Hero`.
+4. a mesma imagem e animada entre lista e detalhe via `Hero`;
+5. a tela busca `PokemonDetails`;
+6. o corpo mostra os dados detalhados.
 
-## Relacao com a nova camada de detalhe
+## Relacao com a camada de detalhe
 
-O projeto agora ja possui:
+Essa tela depende diretamente de:
 
 - `PokeApiService.getPokemonDetail(...)`;
 - `PokemonDetails`;
-- `DetailStore`.
+- `DetailStore`;
+- `Characteristc`;
+- `PercentageIndicator`.
 
-Aqui essa camada ja esta sendo usada para iniciar o carregamento quando a tela abre.
+Hoje ela ja usa todos os blocos principais do model:
 
-## Limitacao atual
-
-Hoje a `DetailPage` ja busca os detalhes e ja renderiza parte de `pokemonDetails` no corpo da tela.
-
-No estado atual, ela mostra:
-
-- nome;
-- ID;
-- tipos.
-
-Ela ainda pode crescer para exibir peso, altura, experiencia base e stats.
+- `name`;
+- `id`;
+- `types`;
+- `height`;
+- `baseExperience`;
+- `weight`;
+- `stats`.

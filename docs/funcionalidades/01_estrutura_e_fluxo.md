@@ -23,6 +23,8 @@ Este guia mostra como o projeto esta organizado e como os dados saem da PokeAPI,
 - `lib/models/pokemon_type.model.dart`
 - `lib/models/type.model.dart`
 - `lib/widgets/poke_card.widget.dart`
+- `lib/widgets/characteristc.widget.dart`
+- `lib/widgets/percentage_indicator.widget.dart`
 
 ## Estrutura principal
 
@@ -33,6 +35,11 @@ lib/
 |- models/
 |  |- poke_response.model.dart
 |  |- pokemon.model.dart
+|  |- pokemon_details.model.dart
+|  |- stat.model.dart
+|  |- pokemon_stat.model.dart
+|  |- pokemon_type.model.dart
+|  |- type.model.dart
 |- services/
 |  |- poke_api.service.dart
 |- store/
@@ -40,6 +47,8 @@ lib/
 |  |- home.store.g.dart
 |- widgets/
 |  |- poke_card.widget.dart
+|  |- characteristc.widget.dart
+|  |- percentage_indicator.widget.dart
 |- pages/
    |- home/
    |  |- home.page.dart
@@ -54,7 +63,7 @@ lib/
 
 - `main.dart`: inicia o app e abre a `HomePage`.
 - `pages/`: contem as telas e a store especifica da area de detalhe.
-- `widgets/`: contem o `PokeCard`, usado na grade.
+- `widgets/`: contem o `PokeCard` da grade e os widgets auxiliares do detalhe.
 - `store/`: concentra estado da tela inicial.
 - `services/`: centraliza o acesso HTTP a PokeAPI para listagem e detalhe.
 - `models/`: transformam JSON em objetos Dart para listagem e detalhe.
@@ -107,7 +116,8 @@ O projeto agora tambem possui uma segunda trilha de dados:
 6. `stats` viram `Stat`;
 7. cada `Stat` guarda um `PokemonStat`;
 8. `types` viram `PokemonType`;
-9. o `Observer` da tela acompanha `isLoading`.
+9. o `Observer` da tela acompanha `isLoading`;
+10. a `DetailPage` desenha tipos, caracteristicas e stats.
 
 ## Fluxo reativo com MobX
 
@@ -193,20 +203,21 @@ A `DetailPage` ja faz parte do fluxo real:
 4. o `Hero` anima a imagem entre lista e detalhe;
 5. o `SliverAppBar` usa `pokemon.color` como fundo.
 
-Hoje essa tela ja faz duas partes do fluxo:
+Hoje essa tela ja faz o fluxo completo do detalhe:
 
 - mostra o topo visual do Pokemon;
-- dispara a busca de detalhe com `DetailStore`.
-
-Depois disso, o corpo ja desenha parte de `pokemonDetails` com nome, ID e tipos.
+- dispara a busca de detalhe com `DetailStore`;
+- desenha nome e ID;
+- desenha tipos com `Chip`;
+- desenha altura, experiencia e peso com `Characteristc`;
+- desenha stats com `PercentageIndicator`.
 
 ## Limitacoes atuais
 
 - nao existe tratamento visual de erro;
 - `loadPokemons()` nao bloqueia chamadas duplicadas;
 - a busca vale apenas para os itens ja carregados;
-- a paginacao nao controla explicitamente o fim da lista;
-- a `DetailPage` ja usa `DetailStore` e ja exibe nome, ID e tipos, mas ainda nao mostra peso, altura, experiencia base ou stats.
+- a paginacao nao controla explicitamente o fim da lista.
 
 ## Resumo
 
@@ -219,4 +230,4 @@ O fluxo central do projeto e:
 5. a store salva os objetos;
 6. o `Observer` atualiza a grade;
 7. o `PokeCard` aplica a cor dinamica;
-8. o toque no card abre a `DetailPage`.
+8. o toque no card abre a `DetailPage`, que carrega e mostra o detalhe completo.

@@ -2,7 +2,7 @@
 
 ## Objetivo
 
-Criar a tela de detalhe inicial usada quando o usuario toca em um Pokemon na grade.
+Criar a tela de detalhe final usada quando o usuario toca em um Pokemon na grade.
 
 ## Passo 1: criar o arquivo
 
@@ -21,6 +21,8 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pokedex_flutter/colors.dart';
 import 'package:pokedex_flutter/models/pokemon.model.dart';
 import 'package:pokedex_flutter/pages/detail/stores/detail.store.dart';
+import 'package:pokedex_flutter/widgets/characteristc.widget.dart';
+import 'package:pokedex_flutter/widgets/percentage_indicator.widget.dart';
 ```
 
 ## Passo 3: criar a classe, receber o Pokemon e instanciar a store
@@ -104,6 +106,52 @@ Widget build(BuildContext context) {
                                   <Widget>[]),
                             ],
                           ),
+                          SizedBox(height: 20),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Characteristc(
+                                value: store.pokemonDetails!.height.toString(),
+                                name: "Height",
+                              ),
+                              Characteristc(
+                                value: store.pokemonDetails!.baseExperience
+                                    .toString(),
+                                name: "Experience",
+                              ),
+                              Characteristc(
+                                value: store.pokemonDetails!.weight.toString(),
+                                name: "Weight",
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 20),
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              "Stats",
+                              style: TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold,
+                                color: primaryColor,
+                              ),
+                            ),
+                          ),
+                          Divider(),
+                          ListView.builder(
+                            padding: EdgeInsets.zero,
+                            itemCount: store.pokemonDetails?.stats?.length ?? 0,
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemBuilder: (ctx, index) {
+                              final stat = store.pokemonDetails!.stats![index];
+                              return PercentageIndicator(
+                                name: stat.stat.name,
+                                value: stat.baseStat,
+                                color: pokemon.color,
+                              );
+                            },
+                          ),
                         ],
                       ),
                     ),
@@ -124,8 +172,10 @@ Widget build(BuildContext context) {
 4. a cor do topo vem de `pokemon.color`;
 5. a imagem reaproveita o mesmo `Hero` do card;
 6. o `Observer` escuta `isLoading`;
-7. o corpo ja mostra nome, ID e tipos;
-8. a estrutura permite adicionar mais slivers depois.
+7. o corpo mostra os dados principais do Pokemon;
+8. `Characteristc` mostra altura, experiencia e peso;
+9. `PercentageIndicator` mostra os stats;
+10. a tela final usa o model de detalhe completo.
 
 ## Como verificar
 
@@ -135,4 +185,4 @@ Se estiver certo:
 
 1. a tela de detalhe abre com a imagem animada e o topo colorido;
 2. o loading de detalhe e disparado;
-3. depois do loading, aparecem nome, numero e tipos do Pokemon.
+3. depois do loading, aparecem nome, numero, tipos, caracteristicas e stats do Pokemon.

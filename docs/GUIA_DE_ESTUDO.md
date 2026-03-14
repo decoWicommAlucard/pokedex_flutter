@@ -35,6 +35,8 @@ Se quiser aprender recriando o projeto do zero, use tambem:
 14. [cores dos cards](funcionalidades/04_cores_dos_cards.md)
 15. [scroll infinito](funcionalidades/05_scroll_infinito.md)
 16. [detail.page.dart](arquivos/10_detail.page.dart.md)
+17. [characteristc.widget.dart](arquivos/18_characteristc.widget.dart.md)
+18. [percentage_indicator.widget.dart](arquivos/19_percentage_indicator.widget.dart.md)
 
 ## Documentacao por arquivo
 
@@ -55,6 +57,8 @@ Se quiser aprender recriando o projeto do zero, use tambem:
 - [15_type.model.dart.md](arquivos/15_type.model.dart.md)
 - [16_detail.store.dart.md](arquivos/16_detail.store.dart.md)
 - [17_detail.store.g.dart.md](arquivos/17_detail.store.g.dart.md)
+- [18_characteristc.widget.dart.md](arquivos/18_characteristc.widget.dart.md)
+- [19_percentage_indicator.widget.dart.md](arquivos/19_percentage_indicator.widget.dart.md)
 
 ## Documentacao por funcionalidade
 
@@ -72,7 +76,7 @@ Se quiser aprender recriando o projeto do zero, use tambem:
 
 ## Observacao importante
 
-A tela [10_detail.page.dart.md](arquivos/10_detail.page.dart.md) continua sendo a entrada visual do detalhe e agora ja dispara o carregamento pela `DetailStore`.
+A tela [10_detail.page.dart.md](arquivos/10_detail.page.dart.md) continua sendo a entrada visual do detalhe e agora ja entrega a versao final da tela.
 
 Ao mesmo tempo, o projeto agora ja possui uma camada pronta para detalhes completos com:
 
@@ -80,4 +84,9 @@ Ao mesmo tempo, o projeto agora ja possui uma camada pronta para detalhes comple
 - [16_detail.store.dart.md](arquivos/16_detail.store.dart.md)
 - [07_detalhes_do_pokemon.md](funcionalidades/07_detalhes_do_pokemon.md)
 
-Hoje essa tela ja mostra o loading e tambem renderiza nome, ID e tipos do Pokemon.
+Hoje essa tela ja mostra:
+
+- nome e ID;
+- tipos com `Chip`;
+- altura, experiencia e peso com `Characteristc`;
+- stats com `PercentageIndicator`.

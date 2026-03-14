@@ -7,7 +7,7 @@ Ter um roteiro unico para refazer o projeto inteiro do zero.
 ## Ordem completa
 
 1. crie o projeto Flutter;
-2. instale `uno`, `mobx`, `flutter_mobx`, `palette_generator`, `cached_network_image`, `build_runner` e `mobx_codegen`;
+2. instale `uno`, `mobx`, `flutter_mobx`, `palette_generator`, `cached_network_image`, `percent_indicator`, `build_runner` e `mobx_codegen`;
 3. organize as pastas de `lib/`;
 4. crie `pokemon.model.dart`;
 5. crie `poke_response.model.dart`;
@@ -22,9 +22,11 @@ Ter um roteiro unico para refazer o projeto inteiro do zero.
 14. gere `home.store.g.dart` e `detail.store.g.dart`;
 15. crie `colors.dart`;
 16. crie `detail.page.dart`;
-17. crie `poke_card.widget.dart`;
-18. crie `home.page.dart`;
-19. ajuste `main.dart` para abrir a `HomePage`.
+17. crie `characteristc.widget.dart`;
+18. crie `percentage_indicator.widget.dart`;
+19. crie `poke_card.widget.dart`;
+20. crie `home.page.dart`;
+21. ajuste `main.dart` para abrir a `HomePage`.
 
 ## Ordem completa com codigo
 
@@ -34,7 +36,7 @@ Se quiser seguir o projeto inteiro sem procurar onde esta cada trecho, use esta 
 - Models: [07_pokemon.model.dart.md](../arquivos/07_pokemon.model.dart.md), [08_poke_response.model.dart.md](../arquivos/08_poke_response.model.dart.md), [11_pokemon_details.model.dart.md](../arquivos/11_pokemon_details.model.dart.md), [12_stat.model.dart.md](../arquivos/12_stat.model.dart.md), [13_pokemon_stat.model.dart.md](../arquivos/13_pokemon_stat.model.dart.md), [14_pokemon_type.model.dart.md](../arquivos/14_pokemon_type.model.dart.md) e [15_type.model.dart.md](../arquivos/15_type.model.dart.md)
 - Service: [06_poke_api.service.dart.md](../arquivos/06_poke_api.service.dart.md)
 - Store: [04_home.store.dart.md](../arquivos/04_home.store.dart.md), [16_detail.store.dart.md](../arquivos/16_detail.store.dart.md), depois gere [05_home.store.g.dart.md](../arquivos/05_home.store.g.dart.md) e [17_detail.store.g.dart.md](../arquivos/17_detail.store.g.dart.md)
-- Cores e detalhe: [02_colors.dart.md](../arquivos/02_colors.dart.md) e [10_detail.page.dart.md](../arquivos/10_detail.page.dart.md)
+- Cores e detalhe: [02_colors.dart.md](../arquivos/02_colors.dart.md), [10_detail.page.dart.md](../arquivos/10_detail.page.dart.md), [18_characteristc.widget.dart.md](../arquivos/18_characteristc.widget.dart.md) e [19_percentage_indicator.widget.dart.md](../arquivos/19_percentage_indicator.widget.dart.md)
 - Card e tela principal: [09_poke_card.widget.dart.md](../arquivos/09_poke_card.widget.dart.md), [03_home.page.dart.md](../arquivos/03_home.page.dart.md) e [01_main.dart.md](../arquivos/01_main.dart.md)
 
 ## Passo a passo por funcionalidade com trechos de codigo
@@ -96,7 +98,7 @@ Se preferir montar o projeto por fases, siga nesta ordem:
 - `PokemonDetails`;
 - `DetailStore`;
 - `getPokemonDetail(...)`;
-- nome, ID e tipos na `DetailPage`.
+- nome, ID, tipos, caracteristicas e stats na `DetailPage`.
 
 ## Comandos da recriacao
 
@@ -130,7 +132,7 @@ Os cards devem trocar de branco para cores baseadas na imagem.
 
 ### Fase 6
 
-Ao tocar em um card, a tela de detalhe deve abrir, carregar os dados e mostrar nome, ID e tipos.
+Ao tocar em um card, a tela de detalhe deve abrir, carregar os dados e mostrar nome, ID, tipos, caracteristicas e stats.
 
 ## Melhor forma de estudar
 

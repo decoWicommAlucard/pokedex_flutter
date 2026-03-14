@@ -44,9 +44,11 @@ Se voce sentiu falta do codigo no roteiro, use esta regra:
 13. [17_detail.store.g.dart.md](arquivos/17_detail.store.g.dart.md)
 14. [02_colors.dart.md](arquivos/02_colors.dart.md)
 15. [10_detail.page.dart.md](arquivos/10_detail.page.dart.md)
-16. [09_poke_card.widget.dart.md](arquivos/09_poke_card.widget.dart.md)
-17. [03_home.page.dart.md](arquivos/03_home.page.dart.md)
-18. [01_main.dart.md](arquivos/01_main.dart.md)
+16. [18_characteristc.widget.dart.md](arquivos/18_characteristc.widget.dart.md)
+17. [19_percentage_indicator.widget.dart.md](arquivos/19_percentage_indicator.widget.dart.md)
+18. [09_poke_card.widget.dart.md](arquivos/09_poke_card.widget.dart.md)
+19. [03_home.page.dart.md](arquivos/03_home.page.dart.md)
+20. [01_main.dart.md](arquivos/01_main.dart.md)
 
 ## Passo a passo por arquivo
 
@@ -67,6 +69,8 @@ Se voce sentiu falta do codigo no roteiro, use esta regra:
 - [15_type.model.dart.md](arquivos/15_type.model.dart.md)
 - [16_detail.store.dart.md](arquivos/16_detail.store.dart.md)
 - [17_detail.store.g.dart.md](arquivos/17_detail.store.g.dart.md)
+- [18_characteristc.widget.dart.md](arquivos/18_characteristc.widget.dart.md)
+- [19_percentage_indicator.widget.dart.md](arquivos/19_percentage_indicator.widget.dart.md)
 
 ## Passo a passo por funcionalidade
 

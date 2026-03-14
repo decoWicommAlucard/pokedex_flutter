@@ -52,7 +52,38 @@ Future<void> getPokemonDetailsData(String id) async {
 }
 ```
 
-## Passo 4: ligar a store na `DetailPage`
+## Passo 4: criar o widget `Characteristc`
+
+Use este bloco:
+
+```dart
+class Characteristc extends StatelessWidget {
+  final String value;
+  final String name;
+
+  const Characteristc({super.key, required this.value, required this.name});
+```
+
+Ele sera usado para mostrar:
+
+- altura;
+- experiencia;
+- peso.
+
+## Passo 5: criar o widget `PercentageIndicator`
+
+Use este bloco:
+
+```dart
+class PercentageIndicator extends StatelessWidget {
+  final String name;
+  final int value;
+  final Color color;
+```
+
+Esse widget desenha a barra usada em cada stat.
+
+## Passo 6: ligar a store na `DetailPage`
 
 Dentro da tela:
 
@@ -64,7 +95,7 @@ DetailPage({super.key, required this.pokemon}) {
 }
 ```
 
-## Passo 5: observar o loading e renderizar os dados
+## Passo 7: observar o loading e renderizar os dados
 
 Use um `Observer` com:
 
@@ -96,6 +127,36 @@ return store.isLoading
                       <Widget>[]),
                 ],
               ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Characteristc(
+                    value: store.pokemonDetails!.height.toString(),
+                    name: "Height",
+                  ),
+                  Characteristc(
+                    value: store.pokemonDetails!.baseExperience.toString(),
+                    name: "Experience",
+                  ),
+                  Characteristc(
+                    value: store.pokemonDetails!.weight.toString(),
+                    name: "Weight",
+                  ),
+                ],
+              ),
+              ListView.builder(
+                itemCount: store.pokemonDetails?.stats?.length ?? 0,
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemBuilder: (ctx, index) {
+                  final stat = store.pokemonDetails!.stats![index];
+                  return PercentageIndicator(
+                    name: stat.stat.name,
+                    value: stat.baseStat,
+                    color: pokemon.color,
+                  );
+                },
+              ),
             ],
           ),
         ),
@@ -113,10 +174,12 @@ return store.isLoading
 - [15_type.model.dart.md](../arquivos/15_type.model.dart.md)
 - [16_detail.store.dart.md](../arquivos/16_detail.store.dart.md)
 - [17_detail.store.g.dart.md](../arquivos/17_detail.store.g.dart.md)
+- [18_characteristc.widget.dart.md](../arquivos/18_characteristc.widget.dart.md)
+- [19_percentage_indicator.widget.dart.md](../arquivos/19_percentage_indicator.widget.dart.md)
 
 ## Como verificar
 
 1. toque em um card;
 2. veja a `DetailPage` abrir;
 3. confira o loading;
-4. depois confira nome, ID e tipos do Pokemon.
+4. depois confira nome, ID, tipos, caracteristicas e stats do Pokemon.

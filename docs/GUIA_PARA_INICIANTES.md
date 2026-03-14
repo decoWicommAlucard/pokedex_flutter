@@ -60,7 +60,9 @@ Um `widget` e um bloco visual reutilizavel.
 
 Exemplo neste projeto:
 
-- `PokeCard`: o card de cada Pokemon na grade.
+- `PokeCard`: o card de cada Pokemon na grade;
+- `Characteristc`: um bloco pequeno para mostrar altura, peso e experiencia;
+- `PercentageIndicator`: a barra visual usada na lista de stats.
 
 ### `store`
 
@@ -288,6 +290,26 @@ Esse widget mostra:
 
 Ele tambem calcula a cor dominante da imagem e envia essa cor para a store.
 
+### `lib/widgets/characteristc.widget.dart`
+
+Renderiza um pequeno bloco de informacao na tela de detalhe.
+
+Hoje ele e usado para mostrar:
+
+- `Height`;
+- `Experience`;
+- `Weight`.
+
+### `lib/widgets/percentage_indicator.widget.dart`
+
+Renderiza uma barra horizontal de percentual para cada stat do Pokemon.
+
+Ele recebe:
+
+- o nome da stat;
+- o valor numerico;
+- a cor do Pokemon.
+
 ### `lib/pages/home/home.page.dart`
 
 E a tela principal do app.
@@ -314,13 +336,15 @@ Hoje ela recebe um `Pokemon` e:
 
 Ela tambem cria uma `DetailStore`, dispara a busca de detalhe e observa `isLoading`.
 
-Hoje ela ja mostra parte de `pokemonDetails` no corpo:
+Hoje ela monta o corpo completo do detalhe com:
 
 - nome;
 - numero;
-- tipos.
-
-O que ainda falta e desenhar o restante do model, como peso, altura, experiencia base e stats.
+- tipos;
+- altura;
+- experiencia base;
+- peso;
+- lista de stats com barras.
 
 ## Conceitos que costumam confundir
 
@@ -604,7 +628,7 @@ Exemplos no projeto:
 14. a tela chama `/pokemon/{id}`;
 15. o resultado dessa chamada vira `PokemonDetails`;
 16. o `Observer` acompanha o loading da tela;
-17. a tela mostra nome, ID e tipos do Pokemon.
+17. a tela mostra nome, ID, tipos, caracteristicas e stats do Pokemon.
 
 ## Qual doc ler depois deste
 
@@ -621,3 +645,5 @@ Depois deste guia, a melhor ordem e:
 9. `docs/arquivos/03_home.page.dart.md`
 10. `docs/arquivos/09_poke_card.widget.dart.md`
 11. `docs/arquivos/10_detail.page.dart.md`
+12. `docs/arquivos/18_characteristc.widget.dart.md`
+13. `docs/arquivos/19_percentage_indicator.widget.dart.md`

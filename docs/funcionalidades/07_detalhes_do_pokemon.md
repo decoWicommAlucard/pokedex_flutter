@@ -14,6 +14,8 @@ Este guia mostra a nova camada de detalhe adicionada ao projeto para buscar dado
 - `lib/models/pokemon_stat.model.dart`
 - `lib/models/pokemon_type.model.dart`
 - `lib/models/type.model.dart`
+- `lib/widgets/characteristc.widget.dart`
+- `lib/widgets/percentage_indicator.widget.dart`
 - `lib/pages/detail/detail.page.dart`
 
 ## Visao geral do fluxo
@@ -151,9 +153,9 @@ Depois da requisicao, ela ja renderiza:
 
 - `name` em caixa alta;
 - `id`;
-- lista de tipos com `Chip`.
-
-A proxima etapa natural e ampliar essa area com peso, altura, experiencia base e stats.
+- lista de tipos com `Chip`;
+- `height`, `baseExperience` e `weight` com `Characteristc`;
+- lista de `stats` com `PercentageIndicator`.
 
 ## Observacao sobre `type.model.dart`
 
@@ -170,5 +172,5 @@ O projeto agora ja tem:
 3. models auxiliares para stats e tipos;
 4. `DetailStore` carregando os dados ao abrir a tela;
 5. `DetailPage` observando o loading;
-6. corpo da tela ja mostrando nome, ID e tipos;
-7. espaco para evoluir o restante dos detalhes.
+6. corpo da tela mostrando nome, ID, tipos, caracteristicas e stats;
+7. widgets auxiliares para deixar a tela de detalhe mais organizada.
