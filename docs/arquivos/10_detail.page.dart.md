@@ -50,6 +50,18 @@ return Scaffold(
 3. a `DetailPage` recebe o `Pokemon`;
 4. a mesma imagem e animada entre lista e detalhe via `Hero`.
 
+## Relacao com a nova camada de detalhe
+
+O projeto agora ja possui:
+
+- `PokeApiService.getPokemonDetail(...)`;
+- `PokemonDetails`;
+- `DetailStore`.
+
+Ou seja, a camada de detalhe ja esta preparada no codigo, mas esta tela ainda nao consome esse estado na interface atual.
+
 ## Limitacao atual
 
-Essa tela ainda e inicial. Hoje ela mostra apenas o topo visual do Pokemon e nao busca dados adicionais da API, como tipos, habilidades ou stats.
+Hoje a `DetailPage` continua mostrando apenas o topo visual do Pokemon.
+
+Ela ainda nao usa `DetailStore` para renderizar peso, altura, tipos ou stats na UI.

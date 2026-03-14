@@ -20,7 +20,7 @@ class PokeApiService {
 
 Assim o projeto nao precisa repetir a URL completa em todas as requisicoes.
 
-## Metodo principal
+## Metodos atuais
 
 ```dart
 Future<PokeResponse> getPokemon({required int offset}) async {
@@ -34,7 +34,19 @@ Future<PokeResponse> getPokemon({required int offset}) async {
 }
 ```
 
-## Passo a passo
+```dart
+Future<PokemonDetails> getPokemonDetail({required String id}) async {
+  final response = await _uno.get("/pokemon/$id");
+
+  if (response.status != HttpStatus.ok) {
+    throw Exception("Failed to load pokemon detail");
+  }
+
+  return PokemonDetails.fromJson(response.data);
+}
+```
+
+## Passo a passo da listagem
 
 1. recebe um `offset`;
 2. faz um `GET` para `/pokemon`;
@@ -42,14 +54,23 @@ Future<PokeResponse> getPokemon({required int offset}) async {
 4. verifica se o status foi `200`;
 5. converte o JSON em `PokeResponse`.
 
+## Passo a passo do detalhe
+
+1. recebe um `id`;
+2. faz um `GET` para `/pokemon/{id}`;
+3. verifica se o status foi `200`;
+4. converte o JSON em `PokemonDetails`.
+
 ## O que foi feito aqui
 
 - a regra HTTP foi separada da interface;
 - a store nao conhece detalhes do pacote `Uno`;
-- a resposta da API ja sai convertida em objeto Dart.
+- a resposta da listagem sai como `PokeResponse`;
+- a resposta de detalhe sai como `PokemonDetails`.
 
-## Limite atual
+## Observacao importante
 
-Hoje esse service faz apenas a listagem dos Pokemons.
+Hoje o service ja atende duas camadas:
 
-Ele ainda nao busca detalhes de um Pokemon especifico.
+- a listagem usada pela `HomeStore`;
+- o detalhe usado pela `DetailStore`.

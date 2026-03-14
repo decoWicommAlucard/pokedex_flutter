@@ -10,11 +10,18 @@ Este guia mostra como o projeto esta organizado e como os dados saem da PokeAPI,
 - `lib/colors.dart`
 - `lib/pages/home/home.page.dart`
 - `lib/pages/detail/detail.page.dart`
+- `lib/pages/detail/stores/detail.store.dart`
+- `lib/pages/detail/stores/detail.store.g.dart`
 - `lib/store/home.store.dart`
 - `lib/store/home.store.g.dart`
 - `lib/services/poke_api.service.dart`
 - `lib/models/poke_response.model.dart`
 - `lib/models/pokemon.model.dart`
+- `lib/models/pokemon_details.model.dart`
+- `lib/models/stat.model.dart`
+- `lib/models/pokemon_stat.model.dart`
+- `lib/models/pokemon_type.model.dart`
+- `lib/models/type.model.dart`
 - `lib/widgets/poke_card.widget.dart`
 
 ## Estrutura principal
@@ -38,16 +45,19 @@ lib/
    |  |- home.page.dart
    |- detail/
       |- detail.page.dart
+      |- stores/
+         |- detail.store.dart
+         |- detail.store.g.dart
 ```
 
 ## Papel de cada camada
 
 - `main.dart`: inicia o app e abre a `HomePage`.
-- `pages/`: contem as telas `HomePage` e `DetailPage`.
+- `pages/`: contem as telas e a store especifica da area de detalhe.
 - `widgets/`: contem o `PokeCard`, usado na grade.
-- `store/`: concentra estado, filtro, paginacao e atualizacao de cor.
-- `services/`: centraliza o acesso HTTP a PokeAPI.
-- `models/`: transformam JSON em objetos Dart com `id`, `imageUrl` e `color`.
+- `store/`: concentra estado da tela inicial.
+- `services/`: centraliza o acesso HTTP a PokeAPI para listagem e detalhe.
+- `models/`: transformam JSON em objetos Dart para listagem e detalhe.
 - `colors.dart`: centraliza a cor principal da interface.
 
 ## Como o app comeca
@@ -84,6 +94,18 @@ Fluxo inicial:
 5. a store faz `pokemons.addAll(...)`.
 6. o getter `filteredPokemons` e recalculado.
 7. o `Observer` da `HomePage` reconstrui a grade.
+
+## Fluxo de detalhe preparado
+
+O projeto agora tambem possui uma segunda trilha de dados:
+
+1. a camada de detalhe pode chamar `DetailStore.getPokemonDetailsData(id)`;
+2. a `DetailStore` usa `_service.getPokemonDetail(id: id)`;
+3. `PokeApiService` faz `GET /pokemon/{id}`;
+4. a resposta JSON vira `PokemonDetails`;
+5. `stats` viram `Stat`;
+6. cada `Stat` guarda um `PokemonStat`;
+7. `types` viram `PokemonType`.
 
 ## Fluxo reativo com MobX
 
@@ -169,7 +191,9 @@ A `DetailPage` ja faz parte do fluxo real:
 4. o `Hero` anima a imagem entre lista e detalhe;
 5. o `SliverAppBar` usa `pokemon.color` como fundo.
 
-Hoje essa tela ainda e inicial: ela mostra o topo visual do Pokemon, mas nao busca detalhes adicionais da API.
+Hoje a interface dessa tela ainda e inicial: ela mostra o topo visual do Pokemon.
+
+Ao mesmo tempo, a camada de dados detalhados ja existe com `DetailStore` e `PokemonDetails`, pronta para ser ligada nessa tela.
 
 ## Limitacoes atuais
 
@@ -177,7 +201,7 @@ Hoje essa tela ainda e inicial: ela mostra o topo visual do Pokemon, mas nao bus
 - `loadPokemons()` nao bloqueia chamadas duplicadas;
 - a busca vale apenas para os itens ja carregados;
 - a paginacao nao controla explicitamente o fim da lista;
-- a `DetailPage` ainda nao exibe tipos, stats ou habilidades.
+- a `DetailPage` ainda nao usa `DetailStore` para exibir tipos, stats ou habilidades.
 
 ## Resumo
 

@@ -69,6 +69,11 @@ Arquivos:
 
 - `lib/models/pokemon.model.dart`
 - `lib/models/poke_response.model.dart`
+- `lib/models/pokemon_details.model.dart`
+- `lib/models/stat.model.dart`
+- `lib/models/pokemon_stat.model.dart`
+- `lib/models/pokemon_type.model.dart`
+- `lib/models/type.model.dart`
 
 Essa etapa prepara o app para trabalhar com objetos Dart em vez de mapas crus.
 
@@ -88,6 +93,14 @@ Essa etapa prepara o app para trabalhar com objetos Dart em vez de mapas crus.
 - `previous`;
 - `results`.
 
+Depois, o projeto tambem ganhou models para o detalhe:
+
+- `PokemonDetails`;
+- `Stat`;
+- `PokemonStat`;
+- `PokemonType`;
+- `Type`.
+
 ## 4. Criacao do service
 
 Arquivo:
@@ -101,6 +114,14 @@ final response = await _uno.get("/pokemon?offset=$offset&limit=20");
 ```
 
 Aqui a PokeAPI foi isolada em uma camada propria, deixando a UI sem codigo HTTP.
+
+Hoje o service tambem possui:
+
+```dart
+final response = await _uno.get("/pokemon/$id");
+```
+
+Isso mostra que a camada HTTP evoluiu da listagem para o detalhe.
 
 ## 5. Criacao da store
 
@@ -118,6 +139,16 @@ A store concentra:
 - `updatePokemonColor(...)`.
 
 Esse e o ponto onde o projeto ganha regra de negocio organizada.
+
+Depois disso, surgiu tambem uma store especifica para o detalhe:
+
+- `lib/pages/detail/stores/detail.store.dart`
+
+Ela concentra:
+
+- `isLoading`;
+- `pokemonDetails`;
+- `getPokemonDetailsData(...)`.
 
 ## 6. Geracao do arquivo do MobX
 
@@ -156,6 +187,12 @@ No codigo atual, a tela:
 - usa `pokemon.color` como fundo do topo.
 
 Ela ainda e simples, mas ja faz parte do fluxo real do app.
+
+Hoje existe tambem uma camada adicional pronta para expandir essa tela:
+
+- `DetailStore`;
+- `PokemonDetails`;
+- endpoint `/pokemon/{id}`.
 
 ## 9. Montagem da `HomePage`
 
@@ -223,12 +260,14 @@ Isso fecha o fluxo para o app iniciar direto na Pokedex.
 2. `poke_response.model.dart`
 3. `poke_api.service.dart`
 4. `home.store.dart`
-5. `home.store.g.dart`
-6. `colors.dart`
-7. `detail.page.dart`
-8. `poke_card.widget.dart`
-9. `home.page.dart`
-10. `main.dart`
+5. `pokemon_details.model.dart`
+6. `detail.store.dart`
+7. `home.store.g.dart`
+8. `colors.dart`
+9. `detail.page.dart`
+10. `poke_card.widget.dart`
+11. `home.page.dart`
+12. `main.dart`
 
 ## O que esse projeto ensina
 
@@ -239,7 +278,8 @@ Isso fecha o fluxo para o app iniciar direto na Pokedex.
 - scroll infinito;
 - filtro local;
 - extracao de cor;
-- navegacao com `Hero`.
+- navegacao com `Hero`;
+- preparacao de uma camada de detalhe com endpoint proprio.
 
 ## Resumo
 
@@ -249,9 +289,10 @@ Uma linha de montagem coerente para o projeto atual e:
 2. dependencias;
 3. models;
 4. service;
-5. store;
-6. geracao do MobX;
-7. base visual;
-8. telas;
-9. widget de card;
-10. integracao final entre busca, scroll, cor e detalhe.
+5. store principal;
+6. camada de detalhe;
+7. geracao do MobX;
+8. base visual;
+9. telas;
+10. widget de card;
+11. integracao final entre busca, scroll, cor e detalhe.

@@ -27,6 +27,8 @@ main.dart
   -> Pokemon
   -> PokeCard
   -> DetailPage
+  -> DetailStore
+  -> PokemonDetails
 ```
 
 Lendo de forma simples:
@@ -37,7 +39,8 @@ Lendo de forma simples:
 4. a `HomeStore` usa o `PokeApiService` para chamar a API;
 5. a resposta da API vira objetos Dart (`PokeResponse` e `Pokemon`);
 6. a tela mostra esses objetos usando `PokeCard`;
-7. ao tocar em um card, abre a `DetailPage`.
+7. ao tocar em um card, abre a `DetailPage`;
+8. o projeto ja tem uma `DetailStore` pronta para buscar `PokemonDetails`.
 
 ## O que significa cada tipo de arquivo
 
@@ -62,7 +65,12 @@ Exemplo neste projeto:
 
 A `store` guarda estado e regras da tela.
 
-Neste projeto, a `HomeStore` sabe:
+Neste projeto:
+
+- a `HomeStore` cuida da tela inicial;
+- a `DetailStore` cuida da camada de detalhe.
+
+A `HomeStore` sabe:
 
 - se esta carregando;
 - qual texto foi digitado na busca;
@@ -75,7 +83,10 @@ Neste projeto, a `HomeStore` sabe:
 
 O `service` e a parte que conversa com algo externo, normalmente uma API.
 
-Neste projeto, `PokeApiService` faz a chamada HTTP para a PokeAPI.
+Neste projeto, `PokeApiService` faz:
+
+- a chamada da listagem;
+- a chamada do detalhe por ID.
 
 ### `model`
 
@@ -86,7 +97,9 @@ Em vez de trabalhar com JSON cru o tempo todo, o projeto transforma a resposta d
 Exemplos:
 
 - `Pokemon`: representa um Pokemon;
-- `PokeResponse`: representa a resposta completa da API.
+- `PokeResponse`: representa a resposta completa da listagem;
+- `PokemonDetails`: representa o detalhe completo de um Pokemon;
+- `Stat`, `PokemonStat` e `PokemonType`: representam blocos internos da resposta de detalhe.
 
 ### `arquivo gerado`
 
@@ -95,6 +108,7 @@ Alguns arquivos nao sao escritos manualmente. Eles sao criados por ferramentas.
 Neste projeto:
 
 - `home.store.g.dart` e gerado pelo MobX com `build_runner`.
+- `detail.store.g.dart` tambem e gerado pelo MobX.
 
 ## Para que serve cada arquivo
 
@@ -157,6 +171,42 @@ results
 
 O `PokeResponse` organiza isso em uma classe Dart.
 
+### `lib/models/pokemon_details.model.dart`
+
+Representa a resposta detalhada de um Pokemon especifico.
+
+Esse model guarda dados que nao existem na listagem basica, como:
+
+- altura;
+- peso;
+- experiencia base;
+- stats;
+- tipos.
+
+### `lib/models/stat.model.dart`
+
+Representa um item da lista de stats detalhados.
+
+Ele junta:
+
+- valor numerico da stat;
+- effort;
+- objeto interno `PokemonStat`.
+
+### `lib/models/pokemon_stat.model.dart`
+
+Representa o bloco interno `stat`, com nome e URL.
+
+### `lib/models/pokemon_type.model.dart`
+
+Representa o bloco interno `type`, com nome e URL do tipo.
+
+### `lib/models/type.model.dart`
+
+Esse model foi criado para guardar `slot` e `type` juntos.
+
+Hoje ele ainda nao participa do fluxo principal da interface.
+
 ### `lib/services/poke_api.service.dart`
 
 Faz a chamada HTTP.
@@ -201,6 +251,29 @@ Ele existe porque o MobX precisa gerar codigo para fazer:
 
 Quando a store muda, esse arquivo ajuda o `Observer` da interface a saber que precisa redesenhar.
 
+### `lib/pages/detail/stores/detail.store.dart`
+
+E a store da camada de detalhe.
+
+Ela guarda:
+
+- `isLoading`;
+- `pokemonDetails`.
+
+Tambem tem a action:
+
+```dart
+getPokemonDetailsData(String id)
+```
+
+que consulta o endpoint de detalhe no service.
+
+### `lib/pages/detail/stores/detail.store.g.dart`
+
+E o arquivo gerado pelo MobX para a `DetailStore`.
+
+Assim como em `home.store.g.dart`, voce nao deve editar esse arquivo manualmente.
+
 ### `lib/widgets/poke_card.widget.dart`
 
 Renderiza o card de um Pokemon.
@@ -237,6 +310,8 @@ Hoje ela ainda e simples. Ela recebe um `Pokemon` e mostra:
 - a imagem em destaque;
 - o `Hero` da transicao;
 - o `SliverAppBar` com a cor do Pokemon.
+
+O projeto ja tem a camada de dados detalhados pronta, mas essa tela ainda nao consome a `DetailStore` na interface atual.
 
 ## Conceitos que costumam confundir
 
@@ -286,7 +361,8 @@ Ele e muito usado quando o objeto precisa ser criado a partir de outro formato, 
 Neste projeto:
 
 - `Pokemon.fromJson(...)` cria um `Pokemon` a partir de um mapa;
-- `PokeResponse.fromJson(...)` cria um `PokeResponse` a partir da resposta da API.
+- `PokeResponse.fromJson(...)` cria um `PokeResponse` a partir da resposta da API;
+- `PokemonDetails.fromJson(...)` cria um `PokemonDetails` a partir do endpoint de detalhe.
 
 ### O que e `copyWith`
 
@@ -469,7 +545,10 @@ No projeto, ele envolve a grade de cards. Entao:
 
 ### `build_runner`
 
-E a ferramenta que gera o arquivo `home.store.g.dart`.
+E a ferramenta que gera arquivos como:
+
+- `home.store.g.dart`;
+- `detail.store.g.dart`.
 
 Comando:
 
@@ -511,7 +590,9 @@ Exemplos no projeto:
 9. a `HomePage` mostra a lista com `PokeCard`;
 10. cada card descobre sua cor dominante;
 11. a store atualiza a cor com `copyWith`;
-12. ao tocar em um card, abre a `DetailPage`.
+12. ao tocar em um card, abre a `DetailPage`;
+13. a camada de detalhe ja pode consultar `/pokemon/{id}`;
+14. o resultado dessa chamada vira `PokemonDetails`.
 
 ## Qual doc ler depois deste
 
@@ -520,8 +601,11 @@ Depois deste guia, a melhor ordem e:
 1. `docs/funcionalidades/01_estrutura_e_fluxo.md`
 2. `docs/arquivos/07_pokemon.model.dart.md`
 3. `docs/arquivos/08_poke_response.model.dart.md`
-4. `docs/arquivos/06_poke_api.service.dart.md`
-5. `docs/arquivos/04_home.store.dart.md`
-6. `docs/arquivos/03_home.page.dart.md`
-7. `docs/arquivos/09_poke_card.widget.dart.md`
-8. `docs/arquivos/10_detail.page.dart.md`
+4. `docs/arquivos/11_pokemon_details.model.dart.md`
+5. `docs/arquivos/06_poke_api.service.dart.md`
+6. `docs/arquivos/04_home.store.dart.md`
+7. `docs/arquivos/16_detail.store.dart.md`
+8. `docs/funcionalidades/07_detalhes_do_pokemon.md`
+9. `docs/arquivos/03_home.page.dart.md`
+10. `docs/arquivos/09_poke_card.widget.dart.md`
+11. `docs/arquivos/10_detail.page.dart.md`

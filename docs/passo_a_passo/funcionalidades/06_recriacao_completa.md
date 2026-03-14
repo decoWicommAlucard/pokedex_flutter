@@ -127,3 +127,11 @@ Refaca nesta sequencia:
 5. card;
 6. tela principal;
 7. melhorias visuais.
+
+## Observacao sobre o codigo atual
+
+O roteiro desta pasta cobre a base principal do projeto.
+
+O codigo atual tambem ja possui uma camada extra para detalhes completos do Pokemon, com `PokemonDetails`, `DetailStore` e endpoint `/pokemon/{id}`.
+
+Essa parte esta documentada em `docs/arquivos/` e em `docs/funcionalidades/07_detalhes_do_pokemon.md`.

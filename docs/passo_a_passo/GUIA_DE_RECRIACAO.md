@@ -70,3 +70,5 @@ O arquivo `home.store.g.dart` nao deve ser escrito manualmente.
 Ele precisa ser gerado pelo `build_runner`.
 
 Outro ponto importante: a recriacao desta pasta agora acompanha o codigo atual, entao a `DetailPage` ja recebe um `Pokemon` e a `HomePage` ja navega para ela.
+
+A camada de detalhe mais completa, com `PokemonDetails`, `DetailStore` e endpoint `/pokemon/{id}`, ja existe no projeto atual e esta documentada na trilha principal em `docs/arquivos/` e `docs/funcionalidades/07_detalhes_do_pokemon.md`.

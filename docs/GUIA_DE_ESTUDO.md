@@ -24,13 +24,17 @@ Se quiser aprender recriando o projeto do zero, use tambem:
 3. [main.dart](arquivos/01_main.dart.md)
 4. [home.page.dart](arquivos/03_home.page.dart.md)
 5. [home.store.dart](arquivos/04_home.store.dart.md)
-6. [filtragem](funcionalidades/02_filtragem.md)
-7. [chamada da API](funcionalidades/03_chamada_da_api.md)
-8. [pokemon.model.dart](arquivos/07_pokemon.model.dart.md)
-9. [poke_card.widget.dart](arquivos/09_poke_card.widget.dart.md)
-10. [cores dos cards](funcionalidades/04_cores_dos_cards.md)
-11. [scroll infinito](funcionalidades/05_scroll_infinito.md)
-12. [detail.page.dart](arquivos/10_detail.page.dart.md)
+6. [chamada da API](funcionalidades/03_chamada_da_api.md)
+7. [pokemon.model.dart](arquivos/07_pokemon.model.dart.md)
+8. [poke_response.model.dart](arquivos/08_poke_response.model.dart.md)
+9. [pokemon_details.model.dart](arquivos/11_pokemon_details.model.dart.md)
+10. [detail.store.dart](arquivos/16_detail.store.dart.md)
+11. [detalhes do Pokemon](funcionalidades/07_detalhes_do_pokemon.md)
+12. [filtragem](funcionalidades/02_filtragem.md)
+13. [poke_card.widget.dart](arquivos/09_poke_card.widget.dart.md)
+14. [cores dos cards](funcionalidades/04_cores_dos_cards.md)
+15. [scroll infinito](funcionalidades/05_scroll_infinito.md)
+16. [detail.page.dart](arquivos/10_detail.page.dart.md)
 
 ## Documentacao por arquivo
 
@@ -44,6 +48,13 @@ Se quiser aprender recriando o projeto do zero, use tambem:
 - [08_poke_response.model.dart.md](arquivos/08_poke_response.model.dart.md)
 - [09_poke_card.widget.dart.md](arquivos/09_poke_card.widget.dart.md)
 - [10_detail.page.dart.md](arquivos/10_detail.page.dart.md)
+- [11_pokemon_details.model.dart.md](arquivos/11_pokemon_details.model.dart.md)
+- [12_stat.model.dart.md](arquivos/12_stat.model.dart.md)
+- [13_pokemon_stat.model.dart.md](arquivos/13_pokemon_stat.model.dart.md)
+- [14_pokemon_type.model.dart.md](arquivos/14_pokemon_type.model.dart.md)
+- [15_type.model.dart.md](arquivos/15_type.model.dart.md)
+- [16_detail.store.dart.md](arquivos/16_detail.store.dart.md)
+- [17_detail.store.g.dart.md](arquivos/17_detail.store.g.dart.md)
 
 ## Documentacao por funcionalidade
 
@@ -53,6 +64,7 @@ Se quiser aprender recriando o projeto do zero, use tambem:
 - [04_cores_dos_cards.md](funcionalidades/04_cores_dos_cards.md)
 - [05_scroll_infinito.md](funcionalidades/05_scroll_infinito.md)
 - [06_como_o_projeto_foi_montado.md](funcionalidades/06_como_o_projeto_foi_montado.md)
+- [07_detalhes_do_pokemon.md](funcionalidades/07_detalhes_do_pokemon.md)
 
 ## Documentacao de Recriacao
 
@@ -60,6 +72,10 @@ Se quiser aprender recriando o projeto do zero, use tambem:
 
 ## Observacao importante
 
-A tela [10_detail.page.dart.md](arquivos/10_detail.page.dart.md) ja faz parte do fluxo principal: tocar em um card abre a `DetailPage`, que hoje mostra a imagem em destaque com `Hero`, `SliverAppBar` e a cor do Pokemon selecionado.
+A tela [10_detail.page.dart.md](arquivos/10_detail.page.dart.md) continua sendo a entrada visual do detalhe.
 
-Ela ainda e uma tela inicial, porque nao faz uma chamada extra para buscar detalhes completos como tipos, stats ou habilidades.
+Ao mesmo tempo, o projeto agora ja possui uma camada pronta para detalhes completos com:
+
+- [11_pokemon_details.model.dart.md](arquivos/11_pokemon_details.model.dart.md)
+- [16_detail.store.dart.md](arquivos/16_detail.store.dart.md)
+- [07_detalhes_do_pokemon.md](funcionalidades/07_detalhes_do_pokemon.md)
